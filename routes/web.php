@@ -20,3 +20,26 @@ Route::post('postlogin', 'logincontroller@postLogin')->name('postlogin');
 // Logout Route
 Route::get('/modal_logout', 'logoutcontroller@getlogout')->name('modal_logout');
 Route::get('/logout', 'logoutcontroller@logout')->name('logout');
+// datauser
+Route::resource('datauser', 'userscontroller');
+Route::get('user-ubah', 'userscontroller@ubah')->name('edituser');
+Route::get('ubah-profile', 'usercontroller@ubahprofile')->name('datauser.profile');
+Route::get('detail/{id}', 'userscontroller@detail')->name('datauser.detail');
+
+// bunga kredit 
+Route::resource('bunga', 'BungakreditController');
+
+// Debitur
+Route::resource('debitur', 'DebiturController');
+
+// Angsuran 
+Route::resource('angsuran', 'AngsuranController');
+
+//transaksi
+Route::resource('transaksi', 'TransaksiController');
+Route::get('caribunga', 'TransaksiController@caribunga')->name('caribunga');
+Route::get('/total-angsuran/{transaksi}/{biayabunga}', 'TransaksiController@getTotal')->name('total-angsuran');
+
+// Route::get('/biaya_pokok/{transaksi}/{biayabunga}', function(){return Response()->json('test');});
+
+// Route::get('/biaya_bunga/{transaksi}/{bunga}/{waktu}', 'TransaksiController@getBungaFlat')->name('biaya-bunga');

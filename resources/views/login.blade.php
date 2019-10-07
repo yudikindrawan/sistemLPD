@@ -35,7 +35,7 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form id="loginform" action="{{ route('postlogin') }}" method="post">
-               {{csrf_field()}}
+              {{csrf_field()}}
               <h1>Login Form</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required="" name="username" id="username" />

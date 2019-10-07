@@ -17,7 +17,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama', 'email', 'password', 'username', 'no_telp'
+        'roles_id',
+        'nama', 
+        'email', 
+        'password', 
+        'username', 
+        'no_telp', 
+        'tempat_lahir',
+        'tanggal_lahir',
+        'foto',
+        'jk'
     ];
 
     /**
@@ -38,7 +47,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function roles(){
-        return $this->belongsTo(roles::class,'roles_id');
+        return $this->belongsTo(roles::class, 'roles_id');
+    }
+    public function angsuran(){
+        return $this->hasMany(angsuran::class);
+    }
+    public function transaksi(){
+        return $this->hasMany(transaksi::class);
+    }
+    public function debitur(){
+        return $this->hasOne(debitur::class);
     }
     public function hasRole($role){
         if($this->roles->nama_roles == $role){

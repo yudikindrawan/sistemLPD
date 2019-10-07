@@ -7,18 +7,18 @@ use Auth;
 
 class logoutcontroller extends Controller
 {
-  public function __construct()
-  {
-      $this->middleware('auth');
-  }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-  public function getlogout()
-  {
-      return view('logout');
-  }
+    public function getlogout()
+    {
+        return view('logout');
+    }
 
-  public function logout(){
-      Auth::logout();
-      return redirect(route('login'));
-  }
+    public function logout(){
+        Auth::logout();
+        return redirect(route('login'));
+    }
 }

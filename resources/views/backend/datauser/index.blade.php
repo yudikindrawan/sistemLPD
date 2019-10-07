@@ -2,105 +2,84 @@
 @section ('title', 'Data User - Sistem Informasi Akutansi LPD Desa Tojan')
 
 @section('content')
-<div class="right_col" role="main">
-  <div class="">
-    <div class="row top_tiles">
-      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-          <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-          <div class="count">179</div>
-          <h3>New Sign ups</h3>
-          <p>Lorem ipsum psdea itgum rixt.</p>
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
+          <div>Data User<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
-      </div>
-      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-          <div class="icon"><i class="fa fa-comments-o"></i></div>
-          <div class="count">179</div>
-          <h3>New Sign ups</h3>
-          <p>Lorem ipsum psdea itgum rixt.</p>
+        <div class="page-title-actions">
+          <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark"><i class="fa fa-star"></i></button>
+                <div class="d-inline-block ">
+                    <a href="{{ route('datauser.create') }}"><button type="button" aria-haspopup="true" aria-expanded="false" class="btn-shadow btn btn-primary"><span class="btn-icon-wrapper pr-2 opacity-7"><i class="pe-7s-plus fa-w-20"></i></span>Tambah</button></a>
+                </div>
+            </div>    
         </div>
-      </div>
-      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-          <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
-          <div class="count">179</div>
-          <h3>New Sign ups</h3>
-          <p>Lorem ipsum psdea itgum rixt.</p>
-        </div>
-      </div>
-      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-          <div class="icon"><i class="fa fa-check-square-o"></i></div>
-          <div class="count">179</div>
-          <h3>New Sign ups</h3>
-          <p>Lorem ipsum psdea itgum rixt.</p>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="dashboard_graph">
-        <div class="row x_title">
-          <div class="col-md-6">
-            <h3>Network Activities <small>Graph title sub-title</small></h3>
-          </div>
-          <div class="col-md-6">
-            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-              <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-              <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-9 col-sm-9 col-xs-12">
-          <div id="chart_plot_01" class="demo-placeholder"></div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-          <div class="x_title">
-            <h2>Top Campaign Performance</h2>
-            <div class="clearfix"></div>
-          </div>
-          <div class="col-md-12 col-sm-12 col-xs-6">
-            <div>
-              <p>Facebook Campaign</p>
-              <div class="">
-                <div class="progress progress_sm" style="width: 76%;">
-                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                </div>
+<div class="row">
+    <div class="col-12">
+          <div class="card">
+              <div class="card-body">
+                  <div class="table-responsive">
+                      <table id="zero_config" class="table table-borderd table-striped">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Roles</th>
+                              <th>Nama</th>
+                              <th>Username</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          @php $i=0 @endphp
+                          @foreach($users as $user)
+                          @php $i++ @endphp
+                          <tbody>
+                              <td>{{$i}}</td>
+                              <td>{{$user->roles->nama_roles}}</td>
+                              <td>{{$user->nama}}</td>
+                              <td>{{$user->username}}</td>
+                              <td style="white-space: nowrap; ">
+                                <a onClick="modalEditTriger( {{ $user->id }} )" data-toggle="modal" class="btn btn-warning btn-sm"><i class="pe-7s-refresh"></i> Reset</a>
+                                <a href="{{ route('datauser.detail', $user->id ) }}" class="btn btn-info btn-sm"><i class="pe-7s-user"></i> Detail</a>
+                              </td>
+                          </tbody>
+                          @endforeach
+                      </table>
+                  </div>
               </div>
-            </div>
-            <div>
-              <p>Twitter Campaign</p>
-              <div class="">
-                <div class="progress progress_sm" style="width: 76%;">
-                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-sm-12 col-xs-6">
-            <div>
-              <p>Conventional Media</p>
-              <div class="">
-                <div class="progress progress_sm" style="width: 76%;">
-                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p>Bill boards</p>
-              <div class="">
-                <div class="progress progress_sm" style="width: 76%;">
-                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
+          </div>    
       </div>
-    </div>
   </div>
 </div>
 @endsection
+@push('scripts')
+<div class="modalKu"></div>
+<script>
+    // MODAL EDIT
+    function modalEditTriger(id){
+      jQuery.noConflict();
+        $.ajax({
+            url     : "{{ route('edituser') }}",
+            method  : 'get',
+            data    : {
+            'id' : id
+            },
+            success : function(response){
+            // console.log(response);
+                $('.modalKu').html(response);
+                $('#editModal').modal({ backdrop: 'static', keyboard: false });
+            }
+        });
+    }
+</script>
+<script>
+    /****************************************
+    *       Basic Table                   *
+    ****************************************/
+  $('#zero_config').DataTable();
+
+</script>
+@endpush

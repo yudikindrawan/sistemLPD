@@ -20,8 +20,13 @@ class CreateUsersTable extends Migration
             $table->string('nama');
             $table->string('username');
             $table->string('password');
-            $table->string('email');
-            $table->string('no_telp');
+            $table->string('tempat_lahir')->nullable();
+            $table->string('tanggal_lahir')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('email')->nullable();
+            $table->enum('jk', ['L','P'])->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('no_telp')->nullable();
             $table->timestamps();
         });
     }
