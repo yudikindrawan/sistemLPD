@@ -17,14 +17,14 @@ class CreateAngsuransTable extends Migration
             $table->Increments('id');
             $table->unsignedinteger('users_id');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedinteger('transaksi_id');
-            $table->foreign('transaksi_id')->references('id')->on('transaksis')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('transaksi_id');
             $table->string('tanggal_pembayaran')->nullable();
-            $table->integer('jumlah_pembayaran')->default(0)->nullable();
-            $table->integer('pembayaran_bunga')->default(0)->nullable();
-            $table->integer('pembayaran_denda')->default(0)->nullable();
-            $table->integer('sisa_kredit')->default(0)->nullable();
-            $table->integer('angsuran')->default(0)->nullable();
+            $table->decimal('jumlah_pembayaran')->default(0)->nullable();
+            $table->decimal('sisa_pembayaran')->default(0)->nullable();
+            $table->decimal('pembayaran_bunga')->default(0)->nullable();
+            $table->decimal('pembayaran_denda')->default(0)->nullable();
+            $table->decimal('sisa_kredit')->default(0)->nullable();
+            $table->decimal('angsuran')->default(0)->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section ('title', 'Data Debitur - Sistem Informasi Akutansi LPD Desa Tojan')
+@section ('title', 'Data Debitur - Sistem Informasi Kredit LPD Desa Tojan')
 
 @section('content')
 <div class="app-main__outer">
@@ -47,8 +47,9 @@
                                 @endif
                             <td style="white-space: nowrap; ">
                                 <a href="{{ route('debitur.edit', $debitur->id)}}" class="btn btn-primary btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Ubah </a>
-                                <a href="" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Detail </a>
+                                <a onClick="modalEditTriger( {{$debitur->id}} )" data-toggle="modal" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Detail </a>
                             </td>
+
                         </tbody>
                         @endforeach
                     </table>
@@ -58,6 +59,7 @@
     </div>
 </div>
 </div>
+
 @endsection
 @push('scripts')
 <div class="modalKu"></div>
@@ -66,7 +68,7 @@
     function modalEditTriger(id){
         jQuery.noConflict();
         $.ajax({
-            url     : "{{ route('edituser') }}",
+            url     : "{{ route('detail-debitur') }}",
             method  : 'get',
             data    : {
             'id' : id
@@ -74,7 +76,7 @@
             success : function(response){
             // console.log(response);
                 $('.modalKu').html(response);
-                $('#editModal').modal({ backdrop: 'static', keyboard: false });
+                $('#detail_debitur').modal({ backdrop: 'static', keyboard: false });
             }
         });
     }

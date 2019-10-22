@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section ('title', 'Data Debitur - Sistem Informasi Akutansi LPD Desa Tojan')
+@section ('title', 'Data Debitur - Sistem Informasi Kredit LPD Desa Tojan')
 
 @section('content')
 <div class="app-main__outer">
@@ -94,7 +94,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">No Telepon</label>
                         <div class="col-sm-10">
-                            <input class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" placeholder="Masukkan Tempat Lahir" type="text">
+                            <input class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" placeholder="Masukkan No Telepon" type="text">
                         </div>
                     </div>
                                 @error('no_telp')

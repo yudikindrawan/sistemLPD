@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        {{ Auth::user()->nama}}
+                                        {{Auth::user()->nama}}
                                     </div>
                                     <div class="widget-subheading">
                                         VP People Manager

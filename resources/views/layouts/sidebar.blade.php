@@ -46,10 +46,10 @@
             <li><a href=""><i class="metismenu-icon pe-7s-pendrive"></i>Transaksi<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i></a>
                 <ul>
                   <li><a href="{{ route('transaksi.index')}}"><i class="metismenu-icon"></i>Kredit</a></li>
-                  <li><a href="elements-dropdowns.html"><i class="metismenu-icon"> </i>Angsuran</a></li>
+                  <li><a href="{{ route('angsuran.index')}}"><i class="metismenu-icon"> </i>Angsuran</a></li>
                 </ul>
               </li>
-            <li><a href="{{ route('bunga.index') }}"><i class="metismenu-icon pe-7s-display2"></i>Bunga Kredit</a></li>
+            <li><a href="{{ route('bunga.index') }}"><i class="metismenu-icon pe-7s-display2"></i>Setting Bunga Kredit</a></li>
         @elseif(Auth::user()->roles_id == 2 )
           <li class="app-sidebar__heading">Dashboards</li>
             <li><a href="{{ route('dashboard')}}"><i class="metismenu-icon pe-7s-rocket"></i> Dashboard</a></li>

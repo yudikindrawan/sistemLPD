@@ -8,7 +8,9 @@ class transaksi extends Model
 {
     //
     protected $table = 'transaksis';
+    
     protected $fillable = [
+        'id',
         'users_id',
         'bunga_id',
         'tanggal_kredit',
@@ -16,9 +18,12 @@ class transaksi extends Model
         'jangka_waktu',
         'jumlah_kredit',
         'angsuran_pokok',
+        'biaya_bunga',
+        'total',
         'biaya_admin',
-        'biaya materai'
-    ];
+        'biaya_materai'];
+        
+    public $incrementing = false;
 
     public function angsuran(){
         return $This->hasMany(angusuran::class);

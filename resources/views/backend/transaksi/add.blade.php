@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section ('title', 'Data Debitur - Sistem Informasi Akutansi LPD Desa Tojan')
+@section ('title', 'Data Debitur - Sistem Informasi Kredit LPD Desa Tojan')
 
 @section('content')
 <div class="app-main__outer">
@@ -20,10 +20,16 @@
                 <form class="" method="post" action="{{ route('transaksi.store') }}" enctype="multipart/form-data" id="myForm">
                 @csrf
                     <div class="position-relative row form-group">
-                        <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Kreditur</label>
+                        <label for="exampleEmail" class="col-sm-2 col-form-label">No Transaksi</label>
+                        <div class="col-sm-4">
+                            <input class="form-control @error('id') is-invalid @enderror" name="id" id="id"  placeholder="No Transaksi" type="text" readonly>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Debitur</label>
                         <div class="col-sm-10">
                             <select name="users_id" id="users_id" class="form-control select2 @error('nama_kreditur') is-invalid @enderror"> 
-                                <option selected="selected" value="" disabled>Nama Kreditur</option>
+                                <option selected="selected" value="" disabled>Nama Debitur</option>
                             @foreach($krediturs as $kredit)   
                                 <option value="{{$kredit->id}}">{{$kredit->nama}}</option>
                             @endforeach
@@ -36,7 +42,7 @@
                                     </span>
                                 @enderror
                     <div class="position-relative row form-group">
-                        <label for="exampleEmail" class="col-sm-2 col-form-label">Tanggal Kredit</label>
+                        <label for="exampleEmail" class="col-sm-2 col-form-label">Tanggal Pencarian</label>
                         <div class="col-sm-4">
                             <input class="form-control @error('tanggal_kredit') is-invalid @enderror" name="tanggal_kredit" id="tanggal_kredit"  placeholder="Tanggal Kredit" type="text">
                         </div>
@@ -66,10 +72,40 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit">
+                            <input  type="text"  placeholder="Masukkan Jumlah Pinjaman" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit">
                         </div>
                     </div>
                                 @error('jumlah_kredit')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label jangka_waktu">Jangka Waktu</label>
+                        <div class="col-sm-4">
+                        <div class="input-group-append">
+                            <input type="text"  placeholder="Masukkan Jangka Waktu" class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu" id="jnkwaktu">
+                            <span class="input-group-text">bulan</span>
+                        </div>
+                        </div>
+                    </div>
+                                @error('jangka_waktu')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label bunga">Setting Bunga</label>
+                        <div class="col-sm-3">
+                            <div class="input-group-prepend">
+                                <input type="text"  placeholder="Masukkan Bunga" class="form-control @error('bunga') is-invalid @enderror" name="bunga" id="bungas">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                @error('bunga')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -90,37 +126,83 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                    <hr>
                     <div class="position-relative row form-group">
-                        <label for="examplePassword" class="col-sm-2 col-form-label jangka_waktu">Jangka Waktu</label>
+                        <label for="examplePassword" class="col-sm-2 col-form-label bunga">Angsuran Pokok</label>
                         <div class="col-sm-4">
-                        <div class="input-group-append">
-                            <input type="text" class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu" id="jnkwaktu">
-                            <span class="input-group-text">bulan</span>
-                        </div>
-                        </div>
-                    </div>
-                                @error('jangka_waktu')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                    <div class="position-relative row form-group">
-                        <label for="examplePassword" class="col-sm-2 col-form-label bunga">Bunga</label>
-                        <div class="col-sm-2">
                             <div class="input-group-prepend">
-                                <input type="text" class="form-control @error('bunga') is-invalid @enderror" name="bunga" id="bungas">
+                                <input type="text"  placeholder="Angsuran Pokok" class="form-control @error('angsuran_pokok') is-invalid @enderror" name="angsuran_pokok" id="angsuran_pokok" readonly>
                                 <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                                @error('bunga')
+                                @error('angsuran_pokok')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                    <hr>
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya bunga</label>
+                        <div class="col-sm-4">
+                            <div class="input-group-prepend">
+                                <input type="text"  placeholder="Biaya Bunga" class="form-control @error('biaya_bunga') is-invalid @enderror" name="biaya_bunga" id="biaya_bunga" readonly>
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                @error('angsuran_pokok')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya Admin</label>
+                        <div class="col-sm-4">
+                            <div class="input-group-prepend">
+                                <input type="text"  placeholder="Biaya Admin" class="form-control @error('biaya_admin') is-invalid @enderror" name="biaya_admin" id="biaya_admin" readonly>
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                @error('angsuran_pokok')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya Materai</label>
+                        <div class="col-sm-4">
+                            <div class="input-group-prepend">
+                                <input type="text"  placeholder="Biaya Materai" class="form-control @error('biaya_materai') is-invalid @enderror" name="biaya_materai" id="biaya_materai" readonly>
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                @error('angsuran_pokok')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label bunga">Total Pembayaran</label>
+                        <div class="col-sm-4">
+                            <div class="input-group-prepend">
+                                <input type="text"  placeholder="Total Pembayaran" class="form-control @error('total_pembayaran') is-invalid @enderror" name="total_pembayaran" id="total_pembayaran" readonly>
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                @error('angsuran_pokok')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                    <div id="biayabunga"></div>
                     <div class="position-relative row form-check">
                         <div class="col-sm-10 offset-sm-2">
                             <!-- <button type="submit" class="btn btn-secondary">Submit</button> -->
@@ -135,7 +217,7 @@
     <div class="row boxkreditur">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
-                <h5 class="card-title">Data Kreditur</h5><hr>
+                <h5 class="card-title">Data Deditur</h5><hr>
                 <table class="table table-hover table-bordered" id="datakreditur">
                     <thead>
                         <th>Jumlah Pinjaman</th>
@@ -144,32 +226,11 @@
                         <th>Bunga</th>
                     </thead>
                     <tbody id="displayArea"> </tbody>
-                        {{-- <tr>
-                            <th>Jumlah Pinjaman</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Jenis Bunga</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Jangka Waktu</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Bunga</th>
-                            <td></td>
-                        </tr> --}}
                 </table>
-                {{-- <hr><h5 class="card-title">Jumlah Angsuran</h5><hr>
-                <table class="table table-hover table-bordered" id="jmlangsuran">
-                    <tbody>
-                        <tr>
-                            <th>Angsuran per Bulan</th>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table> --}}
+                <h3></h3>
+                <div id="pokok"><b>Pokok Pinjaman : Rp.</b></div>
+                <div id="Jwaktu"><b>Jangka Waktu : Rp.</b></div>
+                <div id="Angsuran_perBulan"><b>Biaya Angsuran : Rp.</b></div>
             </div>
         </div>
     </div>
@@ -180,22 +241,14 @@
                 <table class="table table-hover table-bordered" id="angsuran">
                     <thead>
                         <tr>
-                            <th>Periode</th>
+                            <th>Bulan Ke-</th>
                             <th>Angsuran Bunga</th>
                             <th>Angsuran Pokok</th>
                             <th>Total Angsuran</th>
                             <th>Sisa Pinjaman</th>
                         </tr>
                     </thead>
-                    <tbody id="displaykredit">
-                        {{-- <tr>
-                            <td id="periode"></td>
-                            <td id="angsuranbunga"></td>
-                            <td id="angsuranpokok"></td>
-                            <td id="totalangsuran"></td>
-                            <td id="sisapinjaman"></td>
-                        </tr> --}}
-                    </tbody>
+                    <tbody id="displaykredit"></tbody>
                     <tfoot>
                         <tr>
                             <th>Total</th>
@@ -214,38 +267,99 @@
 @push('scripts')
 <script>
     $(document).ready(function(){
-        $("#simulasi").click(function(){
-            
-            var jmlkredit = parseInt($('#jmlkredit').val());
-            var bunga = parseInt($('#bungas').val());
-            var jnkwaktu = parseInt($('#jnkwaktu').val());
-            var pokokpinjaman = jmlkredit / jnkwaktu;
-            var jenis = [];
+        $("#bunga_id").change(function(){
+            var pokokpinjaman = parseFloat($('#jmlkredit').val(), 10);
+            var jangkawaktu = ($('#bungas').val());
+            var bungakredit = ($('#jnkwaktu').val());
+            var biayaAdmin = 3000;
+            var biayamaterai = 10000;
+            var str= [];
             $.each($(".jenisbunga option:selected"), function(){
-                jenis.push($(this).val())
+                str.push($(this).val())
             });
-            if(jenis == 1){
-                // $('#angsuranbunga').append('<td>' + bungaflat + '</td>');
-                $('#angsuranpokok').append('<td>' + flat + '</td>');
-                for (let i = 0; i < jnkwaktu; i++) {
-                    var flat = parseInt(jmlkredit) * parseInt(bunga) / parseInt(jnkwaktu);
-                    jmlkredit = jmlkredit - pokokpinjaman;
-                    $('#displaykredit').append('<tr><td>' + jmlkredit + '</td></tr>');
-                    // alert(flat);
-                }
-            }else if(jenis == 2){
-                alert("ini" + jenis.join(", "));
-            }else if(jenis == 3){
-                alert("ini" + jenis.join(", "));
-            }else if(jenis == 4){
-                alert("ini" + jenis.join(", "));
+            if (str == 1) {
+                // alert("ini" + str.join(", "));
+                var total_flat = (pokokpinjaman * bungakredit) / jangkawaktu;
+                $('#biaya_bunga').val(total_flat);
+                $('#biaya_admin').val(biayaAdmin);
+                $('#biaya_materai').val(biayamaterai);
+            }else if(str == 2){
+
+            }else if(str ==3){
+
             }else{
-                alert("Tidak ada jenis bunga" + jenis.join(", "));
+
             }
+            var angsuranPokok = ($('#angsuran_pokok').val());
+            var biayaBunga = ($('#biaya_bunga').val());
+            var Total = (parseInt(angsuranPokok) + parseInt(biayaBunga) + parseInt(biayaAdmin) + parseInt(biayamaterai));
+            $('#total_pembayaran').val(Total); 
         });
     });
+
+    function getAngsuranPokok(){
+        pokokpinjaman = $(document). find('input[name=jumlah_kredit]').val() || 0;
+        jangkawaktu = $(document). find('input[name=jangka_waktu]').val() || 0;
+
+        $(document).find('input[name=angsuran_pokok]').val(pokokpinjaman / jangkawaktu);
+    }
+
+    $(document).on('input', 'input[name=jangka_waktu]', function() {
+        getAngsuranPokok();
+    });
+    $(document).on('input', 'input[name=jumlah_kredit]', function() {
+        getAngsuranPokok();
+    });
 </script>
+
 <script>
+$(document).ready(function(){
+    $("#simulasi").click(function(){
+        var jmlkredit = parseFloat($('#jmlkredit').val(), 10);
+        var bunga = ($('#bungas').val());
+        var jnkwaktu = ($('#jnkwaktu').val());
+        var periode = $('#tanggal_kredit').val();
+        var pokokpinjaman = jmlkredit / jnkwaktu;
+        var angsuranbunga_flat = (jmlkredit * bunga) / jnkwaktu;
+        var parsebunga = bunga / 100;
+        var jenis = [];
+        $.each($(".jenisbunga option:selected"), function(){
+            jenis.push($(this).val())
+        });
+        if(jenis == 1){
+            for (let i = 1; i <= jnkwaktu; i++) {
+                
+                var total_angsuranflat = angsuranbunga_flat + pokokpinjaman;
+                jmlkredit = jmlkredit - pokokpinjaman;
+                $('#displaykredit').append('<tr><td>Bulan ke-' + i + '</td><td>Rp. ' + addCommas(angsuranbunga_flat) + '</td><td>Rp. ' + addCommas(pokokpinjaman) + '</td><td>Rp. ' + addCommas(total_angsuranflat) + '</td><td>Rp. ' + addCommas(jmlkredit) + ' </td></tr>');
+            }
+        }else if(jenis == 2){
+            alert("ini" + jenis.join(", "));
+        }else if(jenis == 3){
+            for (let a = 1; a <= jnkwaktu; a++) {
+                
+                kreditEfektif = (jmlkredit - ( a - 1) * pokokpinjaman) * bunga / 12;
+                cicilanbulan = pokokpinjaman + kreditEfektif;
+                jmlkredit = jmlkredit - cicilanbulan;
+                $('#displaykredit').append('<tr><td>Bulan ke-' + a + '</td><td>' + addCommas(kreditEfektif) + '</td><td>' + addCommas(pokokpinjaman) + '</td><td>' + addCommas(cicilanbulan) + '</td><td> ' + addCommas(jmlkredit) + ' </td></tr>');
+            }
+        }else if(jenis == 4){
+            alert("ini" + jenis.join(", "));
+        }else{
+            alert("Tidak ada jenis bunga" + jenis.join(", "));
+        }
+    });
+});
+</script>
+
+<script>
+function addCommas(num){
+    var str = num.toString().split('.');
+    if (str[0].length >= 4) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    return str.join('.');
+}
 $(document).ready(function(){
 
     $(".boxkreditur").hide();
@@ -261,144 +375,19 @@ $(document).ready(function(){
         event.preventDefault();
         var $inputs = $('#myForm :input');
         var values = {};
+        var jmlkredit = parseFloat($('#jmlkredit').val(), 10);
+        var jnkwaktu = ($('#jnkwaktu').val());
+        var pokokpinjaman = jmlkredit / jnkwaktu;
         $inputs.each(function(){
             values[this.name] = $(this).val();
         });
-        $('#displayArea').append("<tr><td>" + values.jumlah_kredit + "</td><td>" + values.bunga_id + "</td><td>" + values.jangka_waktu + "</td><td>" + values.bunga + "</td></tr>");
+        $('#displayArea').append("<tr><td>Rp." + addCommas(values.jumlah_kredit) + "</td><td>" + values.bunga_id + "</td><td>" + values.jangka_waktu + " Bulan</td><td>" + values.bunga + "%</td></tr>");
         $("input[type=text], textarea").val("");
+        $('#pokok').append(addCommas(jmlkredit));
+        $('#Jwaktu').append(addCommas(jnkwaktu));
+        $('#Angsuran_perBulan').append(addCommas(pokokpinjaman));
         
     });
-
 });  
 </script>
-
-{{-- <script>
-        transaksi = $(document). find('input[name=jumlah_kredit]').val() || 0;
-        bunga = $(document). find('input[name=bunga]').val() || 0;
-        waktu = $(document). find('input[name=jangka_waktu]').val() || 0;
-
-        $(document).find('input[name=biaya_bunga]').val(transaksi * bunga / waktu);
-
-     transaksi = $(document). find('input[name=jumlah_kredit]').val() || 0;
-        bunga = $(document). find('input[name=bunga]').val() || 0;
-        waktu = $(document). find('input[name=jangka_waktu]').val() || 0;
-$(document).ready(function(){
-    $('#datakreditur').parents('div.table').first().hide();
-    $('#angsuran').parents('div.table').first().hide();
-    $('#jmlangsuran').parents('div.table').first().hide();
-
-    $(document).on('click','.simulasi', function () {
-    $('.boxkreditur').show();
-    $('.boxangsuran').show(); 
-});
-}); 
-
-</script> --}}
-{{-- <script type="text/javascript">
-$(document).on('change','.bunga_id',function () { 
-        var id=$(this).val();
-
-        var a=$(this).parent();
-        console.log(id);
-        var op="";
-        $.ajax({
-        type:'get',
-        url:"{{route('caribunga')}}",
-        data:{'id':id},
-        dataType:'json',//return data will be json
-        success:function(data){
-            console.log(data.bunga);
-
-            // menampilkan value
-            $('#bunga').val(data.bunga);
-        },
-        error:function(){
-
-        }
-        });
-    });
-$(document).ready(function(){
-
-    function getFlat(){
-        transaksi = $(document). find('input[name=jumlah_kredit]').val() || 0;
-        waktu = $(document). find('input[name=jangka_waktu]').val() || 0;
-
-        $(document).find('input[name=angsuran_pokok]').val(transaksi / waktu);
-    }
-
-    $(document).on('input', 'input[name=jumlah_kredit]', function() {
-        getFlat();
-    });
-    $(document).on('input', 'input[name=jangka_waktu]', function() {
-        getFlat();
-    });
-
-
-    function getBungaFlat(){
-        transaksi = $(document). find('input[name=jumlah_kredit]').val() || 0;
-        bunga = $(document). find('input[name=bunga]').val() || 0;
-        waktu = $(document). find('input[name=jangka_waktu]').val() || 0;
-
-        $(document).find('input[name=biaya_bunga]').val(transaksi * bunga / waktu);
-
-    }
-    $(document).on('input', 'input[name=jumlah_kredit]', function() {
-        getBungaFlat();
-    });
-    $(document).on('input', 'input[name=bunga]', function() {
-        getBungaFlat();
-    });
-    $(document).on('input', 'input[name=jangka_waktu]', function() {
-        getBungaFlat();
-    });
-
-    function getTotalFlat() {
-        bunga = $(document). find('select[name=bunga]').val() || 0;
-        $.ajax({
-            url    : "{{url('/total-angsuran')}}/" + $(document).find('select[name=angsuran_pokok]').val() + "/" + bunga,
-            method : 'GET',
-            success : function(response){
-                console.log(response)
-                $(document).find('input[name=total]').val(response.total)
-            }
-        });
-    }
-
-    $(document).on('input', 'input[name=biaya_bunga]', function() {
-        getTotalFlat();
-    });
-
-    $(document).on('input', 'select[name=angsuran_pokok]', function() {
-        getTotalFlat();
-    });
-});
-</script>
-<script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
-    <script>
-        jQuery('.mydatepicker').datepicker();
-
-        $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-    </script> --}}
 @endpush

@@ -19,6 +19,7 @@
             <div class="card-body">
                 <form class="" method="post" action="{{ route('bunga.update', $bungas->id) }}" enctype="multipart/form-data">
                 {{csrf_field() }}
+                    {{method_field('put')}}
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Bunga</label>
                         <div class="col-sm-10">

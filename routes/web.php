@@ -31,14 +31,17 @@ Route::resource('bunga', 'BungakreditController');
 
 // Debitur
 Route::resource('debitur', 'DebiturController');
+Route::get('debitur-detail', 'DebiturController@detail')->name('detail-debitur');
 
 // Angsuran 
 Route::resource('angsuran', 'AngsuranController');
+Route::get('/cari-transaksi', 'AngsuranController@cariTransaksi')->name('cari-transaksi');
+// Route::get('/sisa-pinjaman/{transaksi}/{jangka_waktu}', 'AngsuranController@getSisaPinjaman')->name('sisa-pinjaman');
 
 //transaksi
 Route::resource('transaksi', 'TransaksiController');
 Route::get('caribunga', 'TransaksiController@caribunga')->name('caribunga');
-Route::get('/total-angsuran/{transaksi}/{biayabunga}', 'TransaksiController@getTotal')->name('total-angsuran');
+// Route::get('/total-angsuran/{transaksi}/{biayabunga}', 'TransaksiController@getTotal')->name('total-angsuran');
 
 // Route::get('/biaya_pokok/{transaksi}/{biayabunga}', function(){return Response()->json('test');});
 

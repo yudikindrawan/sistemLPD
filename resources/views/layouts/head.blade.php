@@ -20,7 +20,7 @@
     <link href="{{ asset ('assets/build/architectui/main.css') }}" rel="stylesheet">
     <!-- Datatabels-->
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.0.11/dist/css/select2.min.css">
     @import css
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
-    
 </head>

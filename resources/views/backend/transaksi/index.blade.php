@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section ('title', 'Data Bunga Kredit - Sistem Informasi Akutansi LPD Desa Tojan')
+@section ('title', 'Data Bunga Kredit - Sistem Informasi Kredit LPD Desa Tojan')
 
 @section('content')
 <div class="app-main__outer">
@@ -27,8 +27,12 @@
                         <thead>
                         <tr>
                             <th>No</th>
+                            <th>No Transaksi</th>
                             <th>Nama</th>
                             <th>Tanggal Kredit</th>
+                            <th>Jumlah Kredit</th>
+                            <th>Angsuran Pokok</th>
+                            <th>Jangka Waktu</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -37,8 +41,12 @@
                         @php $i++ @endphp
                         <tbody>
                             <td>{{$i}}</td>
-                            <td></td>
-                            <td>{{$transaksi->tanggal_kredit}}</td>
+                            <td>{{$transaksi->id}}</td>
+                            <td>{{$transaksi->users_id}}</td>
+                            <td>{{$transaksi->created_at}}</td>
+                            <td>{{$transaksi->jumlah_kredit}}</td>
+                            <td>{{$transaksi->angsuran_pokok}}</td>
+                            <td>{{$transaksi->jangka_waktu}}</td>
                             <td style="white-space: nowrap; ">
                             <a href="" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Ubah </a>
                             </td>

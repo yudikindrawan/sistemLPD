@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Log in | Sistem Informasi Akutansi Desa Tojan </title>
+    <title>Log in | Sistem Informasi Kredit LPD Desa Pekraman Tojan </title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset ('assets/production/images/favicon.ico') }}">
     <!-- Bootstrap -->

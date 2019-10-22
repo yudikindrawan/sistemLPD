@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section ('title', 'Data Debitur - Sistem Informasi Akutansi LPD Desa Tojan')
+@section ('title', 'Data Debitur - Sistem Informasi Kredit LPD Desa Tojan')
 
 @section('content')
 <div class="app-main__outer">
@@ -8,7 +8,7 @@
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
-            <div>Tambah Data Debitur<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
+            <div>Ubah Data Debitur<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
         <div class="page-title-actions"> 
             </div>    

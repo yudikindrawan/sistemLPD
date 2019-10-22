@@ -86,9 +86,16 @@ class DebiturController extends Controller
      * @param  \App\debitur  $debitur
      * @return \Illuminate\Http\Response
      */
-    public function show(debitur $debitur)
+    public function show($id)
     {
         //
+    }
+    public function detail(Request $request)
+    {
+        //
+        $debiturs = User::find($request->id);
+        $debit = debitur::all();
+            return view('backend/debitur/detail', compact('debiturs','debit'));
     }
 
     /**
