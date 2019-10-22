@@ -174,6 +174,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+<<<<<<< HEAD
+=======
+        Alfa6661\AutoNumber\AutoNumberServiceProvider::class,
+        Yoeunes\Toastr\ToastrServiceProvider::class,
+>>>>>>> develop
 
     ],
 
