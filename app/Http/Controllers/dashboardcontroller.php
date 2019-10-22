@@ -15,11 +15,14 @@ class dashboardcontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(){
-         $this->middleware('auth');
+        $this->middleware('auth');
     }
     public function index()
     {
         //
+        $users = user::whereHas('roles', function($q){
+            $q->where('nama_roles', 'Kreditur');
+        })->get();
         return view('backend/index');
     }
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\angsuran;
+use App\transaksi;
+use Response;
 use Illuminate\Http\Request;
 
 class AngsuranController extends Controller
@@ -16,7 +18,15 @@ class AngsuranController extends Controller
     {
         //
         $angsurans =  angsuran::all();
-        return view('backend/angsuran/index', compact('angsurans'));
+        $transaksi = transaksi::all();
+        return view('backend/angsuran/add', compact('angsurans','transaksi'));
+
+    }
+
+    public function cariTransaksi(Request $request){
+        
+        $transaksi = transaksi::select('jumlah_kredit','biaya_bunga','total','jangka_waktu')->where('id', $request->id)->first();
+        return Response()->json($transaksi);
     }
 
     /**
@@ -28,7 +38,8 @@ class AngsuranController extends Controller
     {
         //
         $angsurans = angsuran::all();
-        return view('backend/angsuran/add', compact('angsurans'));
+        $transaksi = transaksi::all();
+        return view('backend/angsuran/add', compact('angsurans','transaksi'));
     }
 
     /**
@@ -87,3 +98,4 @@ class AngsuranController extends Controller
         //
     }
 }
+    

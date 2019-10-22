@@ -94,7 +94,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">No Telepon</label>
                         <div class="col-sm-10">
-                            <input class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" placeholder="Masukkan Tempat Lahir" type="text">
+                            <input class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" placeholder="Masukkan No Telepon" type="text">
                         </div>
                     </div>
                                 @error('no_telp')

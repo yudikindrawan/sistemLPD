@@ -58,40 +58,10 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $kredit = transaksi::create([
-            'users_id' => $request->users_id,
-            // 'debiturs_id' => $request->debiturs_id,
-            'bunga_id' => $request->bunga_id,
-            'tanggal_kredit' => Carbon::now(),
-            'jaminan' => $request->jaminan,
-            'jangka_waktu' => $request->jangka_waktu,
-            'jumlah_kredit' => $request->jumlah_kredit,
-            'angsuran_pokok' => $request->angsuran_pokok,
-            'biaya_bunga' => $request->biaya_bunga,
-            'total' => $request->total,
-            'biaya_admin' => $request->biaya_admin,
-            'biaya_materai' => $request->biaya_materai,
-        ]);
-
-        // $request->merge([
-        //     'tanggal_kredit' => Carbon::now(),
-        // ]);
-        // $kredits = transaksi::create($request->all())->save();
-        toastr()->success('Data berhasih diubah', 'Pesan berhasil');
+        $request->merge(['id' => 'TRNS'.rand(1,9999), 'tanggal_kredit' => Carbon::now()]);
+        $kredit = transaksi::create($request->all());
+        toastr()->success('Data berhasih ditambah', 'Pesan berhasil');
         return redirect()->route('transaksi.index');
-
-        $kredit = new kredit;
-
-        if($kredit->bunga_id == 1){
-            
-        }elseif ($kredit->bunga_id == 2) {
-            # code...
-        }elseif ($kredi->bunga_id == 3) {
-            # code...
-        }else {
-            # code...
-        }
 
         
     }
@@ -113,9 +83,17 @@ class TransaksiController extends Controller
      * @param  \App\transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(transaksi $transaksi)
+    public function edit($id)
     {
         //
+        $kredit = transaksi::find($id);
+        // dd($kredit);
+        $krediturs = User::whereHas('roles', function($q){
+            $q->where('nama_roles', 'Kreditur');
+        })->get();
+
+        $bungas = bungakredit::all();
+        return view('backend/transaksi/ubah', compact('kredit','krediturs','bungas'));
     }
 
     /**
@@ -125,9 +103,14 @@ class TransaksiController extends Controller
      * @param  \App\transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, transaksi $transaksi)
+    public function update(Request $request, $id)
     {
         //
+        $kredit = transaksi::find($id);
+        $kredit->fill($request->all())->save();
+        toastr()->success('Data berhasih diubah', 'Pesan berhasil');
+        return redirect()->route('transaksi.index');
+
     }
 
     /**

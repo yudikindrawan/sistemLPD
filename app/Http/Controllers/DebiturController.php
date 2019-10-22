@@ -100,9 +100,9 @@ class DebiturController extends Controller
     public function edit($id)
     {
         //
-        
         $debiturs = User::find($id);
-            return view('backend/debitur/ubah', compact('debiturs'));
+        $detail_debit = debitur::all();
+        return view('backend/debitur/ubah', compact('debiturs','detail_debit'));
     }
 
     /**

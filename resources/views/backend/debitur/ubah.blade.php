@@ -29,7 +29,7 @@
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">No KTP</label>
                         <div class="col-sm-10">
-                            <input name="no_ktp" id="no_ktp" value="{{$debiturs->debitur->no_ktp}}" type="text" class="form-control">
+                            <input name="no_ktp" id="no_ktp" value="{{$debiturs->no_ktp}}" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
@@ -73,7 +73,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Pekerjaan</label>
                         <div class="col-sm-10">
-                        <input name="pekerjaan" id="examplePassword" value="{{$debiturs->debitur->pekerjaan}}" type="text" class="form-control">
+                        <input name="pekerjaan" id="examplePassword" value="{{$debiturs->pekerjaan}}" type="text" class="form-control">
                         </div>
                     </div>
                         <!-- Validasi Image -->

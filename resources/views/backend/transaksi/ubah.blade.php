@@ -2,13 +2,14 @@
 @section ('title', 'Data Debitur - Sistem Informasi Akutansi LPD Desa Tojan')
 
 @section('content')
+{{-- @php dd($kredit); @endphp --}}
 <div class="app-main__outer">
     <div class="app-main__inner">
     <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
-            <div>Tambah Transaksi Kredit<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
+            <div>Ubah Transaksi Kredit<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
         <div class="page-title-actions"> 
             </div>
@@ -17,12 +18,13 @@
     <div class="row">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
-                <form class="" method="post" action="{{ route('transaksi.store') }}" enctype="multipart/form-data" id="myForm">
-                @csrf
+                <form class="" method="post" action="{{ route('transaksi.update', $kredit->id) }}" enctype="multipart/form-data" id="myForm">
+                {{csrf_field() }}
+                    {{method_field('put')}}
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">No Transaksi</label>
                         <div class="col-sm-4">
-                            <input class="form-control @error('id') is-invalid @enderror" name="id" id="id"  placeholder="No Transaksi" type="text" readonly>
+                            <input class="form-control @error('id') is-invalid @enderror" name="id" id="id" value="{{$kredit->id}}"  placeholder="No Transaksi" type="text" readonly>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
@@ -30,21 +32,21 @@
                         <div class="col-sm-10">
                             <select name="users_id" id="users_id" class="form-control select2 @error('nama_kreditur') is-invalid @enderror"> 
                                 <option selected="selected" value="" disabled>Nama Debitur</option>
-                            @foreach($krediturs as $kredit)   
-                                <option value="{{$kredit->id}}">{{$kredit->nama}}</option>
+                            @foreach($krediturs as $user)   
+                                <option value="{{$user->id}}"
+                                    @if($user->id === $kredit->user_id)
+                                        selected
+                                    @endif
+                                    >{{$user->nama}}
+                                </option>
                             @endforeach
                             </select>
                         </div>
                     </div>
-                                @error('nama_kreditur')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Tanggal Pencarian</label>
                         <div class="col-sm-4">
-                            <input class="form-control @error('tanggal_kredit') is-invalid @enderror" name="tanggal_kredit" id="tanggal_kredit"  placeholder="Tanggal Kredit" type="text">
+                            <input class="form-control @error('id') is-invalid @enderror" name="tanggal_kredit" id="id" value="{{$kredit->tanggal_kredit}}" type="text">
                         </div>
                     </div>
                                 @error('tanggal_kredit')
@@ -52,27 +54,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                    {{-- <div class="position-relative row form-group">
-                        <label for="exampleEmail" class="col-sm-2 col-form-label">Nama User</label>
-                        <div class="col-sm-10">
-                            <select name="debiturs_id" id="debiturs_id" class="form-control select2 @error('nama_admin') is-invalid @enderror"> 
-                                <option selected="selected" value="" disabled>Pilih User</option>
-                            @foreach($transaksis as $transaksi)   
-                                <option value="{{$transaksi}}">{{$transaksi->nama}}</option>
-                            @endforeach
-                            </select>
-                        </div>
-                    </div>
-                                @error('nama_admin')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
                     <hr>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text"  placeholder="Masukkan Jumlah Pinjaman" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit">
+                            <input  type="text" value="{{$kredit->jumlah_kredit}}" placeholder="Masukkan Jumlah Pinjaman" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit">
                         </div>
                     </div>
                                 @error('jumlah_kredit')
@@ -84,7 +70,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label jangka_waktu">Jangka Waktu</label>
                         <div class="col-sm-4">
                         <div class="input-group-append">
-                            <input type="text"  placeholder="Masukkan Jangka Waktu" class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu" id="jnkwaktu">
+                            <input type="text" value="{{$kredit->jangka_waktu}}" placeholder="Masukkan Jangka Waktu" class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu" id="jnkwaktu">
                             <span class="input-group-text">bulan</span>
                         </div>
                         </div>
@@ -131,7 +117,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Angsuran Pokok</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Angsuran Pokok" class="form-control @error('angsuran_pokok') is-invalid @enderror" name="angsuran_pokok" id="angsuran_pokok" readonly>
+                                <input type="text" value="{{$kredit->angsuran_pokok}}"  placeholder="Angsuran Pokok" class="form-control @error('angsuran_pokok') is-invalid @enderror" name="angsuran_pokok" id="angsuran_pokok" readonly>
                                 <div class="input-group-append">
                                 </div>
                             </div>
@@ -146,7 +132,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya bunga</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Biaya Bunga" class="form-control @error('biaya_bunga') is-invalid @enderror" name="biaya_bunga" id="biaya_bunga" readonly>
+                                <input type="text" value="{{$kredit->biaya_bunga}}" placeholder="Biaya Bunga" class="form-control @error('biaya_bunga') is-invalid @enderror" name="biaya_bunga" id="biaya_bunga" readonly>
                                 <div class="input-group-append">
                                 </div>
                             </div>
@@ -161,7 +147,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya Admin</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Biaya Admin" class="form-control @error('biaya_admin') is-invalid @enderror" name="biaya_admin" id="biaya_admin" readonly>
+                                <input type="text" value="{{$kredit->biaya_admin}}" placeholder="Biaya Admin" class="form-control @error('biaya_admin') is-invalid @enderror" name="biaya_admin" id="biaya_admin" readonly>
                                 <div class="input-group-append">
                                 </div>
                             </div>
@@ -176,7 +162,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya Materai</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Biaya Materai" class="form-control @error('biaya_materai') is-invalid @enderror" name="biaya_materai" id="biaya_materai" readonly>
+                                <input type="text" value="{{$kredit->biaya_materai}}" placeholder="Biaya Materai" class="form-control @error('biaya_materai') is-invalid @enderror" name="biaya_materai" id="biaya_materai" readonly>
                                 <div class="input-group-append">
                                 </div>
                             </div>
@@ -191,7 +177,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Total Pembayaran</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Total Pembayaran" class="form-control @error('total_pembayaran') is-invalid @enderror" name="total_pembayaran" id="total_pembayaran" readonly>
+                                <input type="text" value="{{$kredit->total}}" placeholder="Total Pembayaran" class="form-control @error('total_pembayaran') is-invalid @enderror" name="total_pembayaran" id="total_pembayaran" readonly>
                                 <div class="input-group-append">
                                 </div>
                             </div>
@@ -207,7 +193,7 @@
                         <div class="col-sm-10 offset-sm-2">
                             <!-- <button type="submit" class="btn btn-secondary">Submit</button> -->
                             <input type="submit" class="btn btn-secondary btn-lg" value="Simpan">
-                            <button type="button" class="btn btn-primary btn-lg simulasi" id="simulasi">Simulasi</button>
+                            
                         </div>
                     </div>
                 </form>
@@ -320,8 +306,8 @@ $(document).ready(function(){
         var jnkwaktu = ($('#jnkwaktu').val());
         var periode = $('#tanggal_kredit').val();
         var pokokpinjaman = jmlkredit / jnkwaktu;
+        var angsuranbunga_flat = (jmlkredit * bunga) / jnkwaktu;
         var parsebunga = bunga / 100;
-        var angsuranbunga_flat = (jmlkredit * parsebunga) / jnkwaktu;
         var jenis = [];
         $.each($(".jenisbunga option:selected"), function(){
             jenis.push($(this).val())
