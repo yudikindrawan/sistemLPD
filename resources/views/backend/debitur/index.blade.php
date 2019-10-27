@@ -11,11 +11,10 @@
             <div>Data Debitur<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
         <div class="page-title-actions">
-            <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark"><i class="fa fa-star"></i></button>
                 <div class="d-inline-block ">
                     <a href="{{ route('debitur.create') }}"><button type="button" aria-haspopup="true" aria-expanded="false" class="btn-shadow btn btn-primary"><span class="btn-icon-wrapper pr-2 opacity-7"><i class="pe-7s-plus fa-w-20"></i></span>Tambah</button></a>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 <div class="row">
@@ -34,7 +33,7 @@
                         </tr>
                         </thead>
                         @php $i=0 @endphp
-                        @foreach($debiturs as $debitur)
+                        @foreach($deb as $debitur)
                         @php $i++ @endphp
                         <tbody>
                             <td>{{$i}}</td>
@@ -47,14 +46,14 @@
                                 @endif
                             <td style="white-space: nowrap; ">
                                 <a href="{{ route('debitur.edit', $debitur->id)}}" class="btn btn-primary btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Ubah </a>
-                                <a href="" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Detail </a>
+                                <a onClick="modalEditTriger( {{$debitur->id}} )" data-toggle="modal" href="" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Detail </a>
                             </td>
                         </tbody>
                         @endforeach
                     </table>
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 </div>
 </div>
@@ -66,7 +65,7 @@
     function modalEditTriger(id){
         jQuery.noConflict();
         $.ajax({
-            url     : "{{ route('edituser') }}",
+            url     : "{{ route('debitur-detail') }}",
             method  : 'get',
             data    : {
             'id' : id
@@ -74,7 +73,7 @@
             success : function(response){
             // console.log(response);
                 $('.modalKu').html(response);
-                $('#editModal').modal({ backdrop: 'static', keyboard: false });
+                $('#detaildebiturs').modal({ backdrop: 'static', keyboard: false });
             }
         });
     }

@@ -11,7 +11,6 @@
             <div>Data Bunga<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
         <div class="page-title-actions">
-            <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark"><i class="fa fa-star"></i></button>
                 <div class="d-inline-block ">
                     <a href="{{ route('bunga.create') }}"><button type="button" aria-haspopup="true" aria-expanded="false" class="btn-shadow btn btn-primary"><span class="btn-icon-wrapper pr-2 opacity-7"><i class="pe-7s-plus fa-w-20"></i></span>Tambah</button></a>
                 </div>

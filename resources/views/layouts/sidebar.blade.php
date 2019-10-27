@@ -50,6 +50,12 @@
                 </ul>
               </li>
             <li><a href="{{ route('bunga.index') }}"><i class="metismenu-icon pe-7s-display2"></i>Setting Bunga Kredit</a></li>
+          <li class="app-sidebar__heading">Laporan</li>
+            <li><a href="#"><i class="metismenu-icon pe-7s-note2"></i>Laporan LPD<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i></a>
+              <ul>
+                <li><a href="{{ route('index-report') }}"><i class="metismenu-icon pe-7s-mouse"></i>Laporan Transaksi</a></li>
+              </ul>
+            </li>
         @elseif(Auth::user()->roles_id == 2 )
           <li class="app-sidebar__heading">Dashboards</li>
             <li><a href="{{ route('dashboard')}}"><i class="metismenu-icon pe-7s-rocket"></i> Dashboard</a></li>
@@ -63,8 +69,6 @@
             <li><a href="#"><i class="metismenu-icon pe-7s-note2"></i>Laporan LPD<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i></a>
               <ul>
                 <li><a href="{{ route('index-report') }}"><i class="metismenu-icon pe-7s-mouse"></i>Laporan Transaksi</a></li>
-                <li><a href="forms-layouts.html"><i class="metismenu-icon pe-7s-eyedropper"></i>laporan 2</a></li>
-                <li><a href="forms-validation.html"><i class="metismenu-icon pe-7s-pendrive"></i>laporan 3</a></li>
               </ul>
             </li>
         @endif

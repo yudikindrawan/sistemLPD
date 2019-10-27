@@ -10,7 +10,7 @@
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
             <div>Tambah Transaksi Kredit<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
-        <div class="page-title-actions"> 
+        <div class="page-title-actions">
             </div>
         </div>
     </div>
@@ -19,18 +19,18 @@
             <div class="card-body">
                 <form class="" method="post" action="{{ route('transaksi.store') }}" enctype="multipart/form-data" id="myForm">
                 @csrf
-                    <div class="position-relative row form-group">
+                    <!-- <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">No Transaksi</label>
                         <div class="col-sm-4">
                             <input class="form-control @error('id') is-invalid @enderror" name="id" id="id"  placeholder="No Transaksi" type="text" readonly>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Debitur</label>
                         <div class="col-sm-10">
-                            <select name="users_id" id="users_id" class="form-control select2 @error('nama_kreditur') is-invalid @enderror"> 
+                            <select name="users_id" id="users_id" class="form-control select2 @error('nama_kreditur') is-invalid @enderror">
                                 <option selected="selected" value="" disabled>Nama Debitur</option>
-                            @foreach($krediturs as $kredit)   
+                            @foreach($krediturs as $kredit)
                                 <option value="{{$kredit->id}}">{{$kredit->nama}}</option>
                             @endforeach
                             </select>
@@ -44,7 +44,7 @@
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Tanggal Pencarian</label>
                         <div class="col-sm-4">
-                            <input class="form-control @error('tanggal_kredit') is-invalid @enderror" name="tanggal_kredit" id="tanggal_kredit"  placeholder="Tanggal Kredit" type="text">
+                            <input type="text" class="form-control custom-select @error('tanggal_kredit') is-invalid @enderror datepicker" name="tanggal_kredit" id="tanggal_kredit" placeholder="mm/dd/yyyy" required >
                         </div>
                     </div>
                                 @error('tanggal_kredit')
@@ -55,9 +55,9 @@
                     {{-- <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Nama User</label>
                         <div class="col-sm-10">
-                            <select name="debiturs_id" id="debiturs_id" class="form-control select2 @error('nama_admin') is-invalid @enderror"> 
+                            <select name="debiturs_id" id="debiturs_id" class="form-control select2 @error('nama_admin') is-invalid @enderror">
                                 <option selected="selected" value="" disabled>Pilih User</option>
-                            @foreach($transaksis as $transaksi)   
+                            @foreach($transaksis as $transaksi)
                                 <option value="{{$transaksi}}">{{$transaksi->nama}}</option>
                             @endforeach
                             </select>
@@ -113,9 +113,9 @@
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label jenis_bunga">Jenis Bunga</label>
                         <div class="col-sm-4">
-                            <select name="bunga_id" id="bunga_id" class="form-control select2 @error('jenis_bunga') is-invalid @enderror jenisbunga"> 
+                            <select name="bunga_id" id="bunga_id" class="form-control select2 @error('jenis_bunga') is-invalid @enderror jenisbunga">
                                 <option selected="selected" value="" disabled>Pilih Jenis Bunga</option>
-                            @foreach($bungas as $bunga)   
+                            @foreach($bungas as $bunga)
                                 <option value="{{$bunga->id}}">{{$bunga->jenis_bunga}}</option>
                             @endforeach
                             </select>
@@ -191,7 +191,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Total Pembayaran</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Total Pembayaran" class="form-control @error('total_pembayaran') is-invalid @enderror" name="total_pembayaran" id="total_pembayaran" readonly>
+                                <input type="text"  placeholder="Total Pembayaran" class="form-control @error('total_pembayaran') is-invalid @enderror" name="total" id="total" readonly>
                                 <div class="input-group-append">
                                 </div>
                             </div>
@@ -293,7 +293,7 @@
             var angsuranPokok = ($('#angsuran_pokok').val());
             var biayaBunga = ($('#biaya_bunga').val());
             var Total = (parseInt(angsuranPokok) + parseInt(biayaBunga) + parseInt(biayaAdmin) + parseInt(biayamaterai));
-            $('#total_pembayaran').val(Total); 
+            $('#total').val(Total);
         });
     });
 
@@ -328,7 +328,7 @@ $(document).ready(function(){
         });
         if(jenis == 1){
             for (let i = 1; i <= jnkwaktu; i++) {
-                
+
                 var total_angsuranflat = angsuranbunga_flat + pokokpinjaman;
                 jmlkredit = jmlkredit - pokokpinjaman;
                 $('#displaykredit').append('<tr><td>Bulan ke-' + i + '</td><td>Rp. ' + addCommas(angsuranbunga_flat) + '</td><td>Rp. ' + addCommas(pokokpinjaman) + '</td><td>Rp. ' + addCommas(total_angsuranflat) + '</td><td>Rp. ' + addCommas(jmlkredit) + ' </td></tr>');
@@ -337,7 +337,7 @@ $(document).ready(function(){
             alert("ini" + jenis.join(", "));
         }else if(jenis == 3){
             for (let a = 1; a <= jnkwaktu; a++) {
-                
+
                 kreditEfektif = (jmlkredit - ( a - 1) * pokokpinjaman) * bunga / 12;
                 cicilanbulan = pokokpinjaman + kreditEfektif;
                 jmlkredit = jmlkredit - cicilanbulan;
@@ -364,7 +364,7 @@ $(document).ready(function(){
 
     $(".boxkreditur").hide();
     $(".boxangsuran").hide();
-    
+
 
     $("#simulasi").click(function() {
         $(".boxkreditur").show();
@@ -386,8 +386,14 @@ $(document).ready(function(){
         $('#pokok').append(addCommas(jmlkredit));
         $('#Jwaktu').append(addCommas(jnkwaktu));
         $('#Angsuran_perBulan').append(addCommas(pokokpinjaman));
-        
+
     });
-});  
+});
+
+jQuery('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    autoclose: true,
+});
+
 </script>
 @endpush

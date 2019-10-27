@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\roles;
+use App\transaksi;
+use App\debitur;
+use App\angsuran;
 use Auth;
 
 class dashboardcontroller extends Controller
@@ -23,7 +26,10 @@ class dashboardcontroller extends Controller
         $users = user::whereHas('roles', function($q){
             $q->where('nama_roles', 'Kreditur');
         })->get();
-        return view('backend/index');
+        $transaksi = transaksi::all();
+        $debitur = debitur::all();
+        $angsuran = angsuran::all();
+        return view('backend/index', compact('transaksi','debitur','angsuran'));
     }
 
     /**

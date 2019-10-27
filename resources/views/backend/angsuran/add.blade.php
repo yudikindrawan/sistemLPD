@@ -10,7 +10,7 @@
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
             <div>Tambah Angsuran<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
-        <div class="page-title-actions"> 
+        <div class="page-title-actions">
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label jenis_bunga">No Transaksi</label>
                         <div class="col-sm-4">
-                            <select name="no_transaksi" id="no_transaksi" class="mb-2 form-control select2 @error('angsuran_ke') is-invalid @enderror no_transaksi"> 
+                            <select name="no_transaksi" id="no_transaksi" class="mb-2 form-control select2 @error('angsuran_ke') is-invalid @enderror no_transaksi">
                                 <option selected="selected" value="" disabled>Pilih No Transaksi</option>
-                            @foreach($transaksi as $trans)   
+                            @foreach($transaksi as $trans)
                                 <option value="{{$trans->id}}">{{$trans->id}}</option>
                             @endforeach
                             </select>
@@ -34,7 +34,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit">
+                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" disabled>
                         </div>
                     </div>
                                 @error('jumlah_kredit')
@@ -45,7 +45,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Biaya Bunga</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="jmlkredit">
+                            <input  type="text" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="jmlkredit" disabled>
                         </div>
                     </div>
                                 @error('biaya_bunga')
@@ -56,7 +56,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Total Pembayaran</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('total_pembayaran') is-invalid @enderror total_pembayaran" name="total_pembayaran" id="total_pembayaran">
+                            <input  type="text" class="form-control @error('total_pembayaran') is-invalid @enderror total_pembayaran" name="total_pembayaran" id="total_pembayaran" disabled>
                         </div>
                     </div>
                                 @error('total_pembayaran')
@@ -67,7 +67,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Sisa Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pinjaman" id="jmlkredit">
+                            <input  type="text" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pinjaman" id="jmlkredit" disabled>
                         </div>
                     </div>
                                 @error('sisa_pinjaman')
@@ -77,7 +77,7 @@
                                 @enderror
                     <hr>
                     <div class="position-relative row form-group">
-                        <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
+                        <label for="examplePassword" class="col-sm-2 col-form-label">Jangka Waktu</label>
                         <div class="col-sm-10">
                             <input  type="text" class="form-control @error('angsuranKe') is-invalid @enderror angsuranKe" name="angsuranKe" id="angsuranKe">
                         </div>
@@ -138,13 +138,13 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 </div>
 @endsection
 @push('scripts')
 <script>
-    $(document).on('change','.no_transaksi',function () { 
+    $(document).on('change','.no_transaksi',function () {
         var id=$(this).val();
 
         var a=$(this).parent();
@@ -177,9 +177,9 @@
 </script>
 
 {{-- <script>
-    
 
-     // $(document).on('change','.bunga_id',function () { 
+
+     // $(document).on('change','.bunga_id',function () {
     //     var id=$(this).val();
 
     //     var a=$(this).parent();
@@ -203,7 +203,7 @@
     // });
 $(document).ready(function(){
     $("#simulasi").click(function(){
-        
+
         var jmlkredit = parseFloat($('#jmlkredit').val(), 10);
         var bunga = ($('#bungas').val());
         var jnkwaktu = ($('#jnkwaktu').val());
@@ -218,7 +218,7 @@ $(document).ready(function(){
         });
         if(jenis == 1){
             for (let i = 1; i <= jnkwaktu; i++) {
-                
+
                 var total_angsuranflat = angsuranbunga_flat + pokokpinjaman;
                 jmlkredit = jmlkredit - pokokpinjaman;
                 $('#displaykredit').append('<tr><td>Bulan ke-' + i + '</td><td>Rp. ' + addCommas(angsuranbunga_flat) + '</td><td>Rp. ' + addCommas(pokokpinjaman) + '</td><td>Rp. ' + addCommas(total_angsuranflat) + '</td><td>Rp. ' + addCommas(jmlkredit) + ' </td></tr>');
@@ -227,7 +227,7 @@ $(document).ready(function(){
             alert("ini" + jenis.join(", "));
         }else if(jenis == 3){
             for (let a = 1; a <= jnkwaktu; a++) {
-                
+
                 kreditEfektif = (jmlkredit - ( a - 1) * pokokpinjaman) * bunga / 12;
                 cicilanbulan = pokokpinjaman + kreditEfektif;
                 jmlkredit = jmlkredit - cicilanbulan;
@@ -255,7 +255,7 @@ $(document).ready(function(){
 
     $(".boxkreditur").hide();
     $(".boxangsuran").hide();
-    
+
 
     $("#simulasi").click(function() {
         $(".boxkreditur").show();
@@ -277,10 +277,10 @@ $(document).ready(function(){
         $('#pokok').append(addCommas(jmlkredit));
         $('#Jwaktu').append(addCommas(jnkwaktu));
         $('#Angsuran_perBulan').append(addCommas(pokokpinjaman));
-        
+
     });
 
-});  
+});
 </script> --}}
 
 {{-- <script>
@@ -300,13 +300,13 @@ $(document).ready(function(){
 
     $(document).on('click','.simulasi', function () {
     $('.boxkreditur').show();
-    $('.boxangsuran').show(); 
+    $('.boxangsuran').show();
 });
-}); 
+});
 
 </script> --}}
 {{-- <script type="text/javascript">
-$(document).on('change','.bunga_id',function () { 
+$(document).on('change','.bunga_id',function () {
         var id=$(this).val();
 
         var a=$(this).parent();

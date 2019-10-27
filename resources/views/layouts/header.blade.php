@@ -28,35 +28,16 @@
                         </span>
                     </button>
                 </span>
-            </div>    <div class="app-header__content">
+            </div>    
+            <div class="app-header__content">
                 <div class="app-header-left">
-                    <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
-                        </div>
-                        <button class="close"></button>
-                    </div>
+                    <div class="search-wrapper"> </div>
                     <ul class="header-menu nav">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-database"> </i>
-                                Statistics
-                            </a>
-                        </li>
-                        <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-edit"></i>
-                                Projects
-                            </a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>        </div>
+                        <li class="nav-item"></li>
+                        <li class="btn-group nav-item"></li>
+                        <li class="dropdown nav-item"></li>
+                    </ul>        
+                </div>
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
                         <div class="widget-content p-0">
@@ -68,20 +49,17 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <a href=""><button type="button" tabindex="0" class="dropdown-item">Pengaturan Akun</button></a>
+                                            {{-- <a href=""><button type="button" tabindex="0" class="dropdown-item">Pengaturan Akun</button></a>
                                             <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                             <a href=""><button type="button" tabindex="0" class="dropdown-item">Lihat Profil</button></a>
-                                            <div tabindex="-1" class="dropdown-divider"></div>
+                                            <div tabindex="-1" class="dropdown-divider"></div> --}}
                                             <a href="{{ route('logout')}}"><button type="button" tabindex="0" class="dropdown-item">Logout</button></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        {{ Auth::user()->nama}}
-                                    </div>
-                                    <div class="widget-subheading">
-                                        VP People Manager
+                                        Hai, {{ Auth::user()->nama}}
                                     </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">

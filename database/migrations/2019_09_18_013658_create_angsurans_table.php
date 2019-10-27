@@ -19,12 +19,12 @@ class CreateAngsuransTable extends Migration
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('transaksi_id');
             $table->string('tanggal_pembayaran')->nullable();
-            $table->decimal('jumlah_pembayaran')->default(0)->nullable();
-            $table->decimal('sisa_pembayaran')->default(0)->nullable();
-            $table->decimal('pembayaran_bunga')->default(0)->nullable();
-            $table->decimal('pembayaran_denda')->default(0)->nullable();
-            $table->decimal('sisa_kredit')->default(0)->nullable();
-            $table->decimal('angsuran')->default(0)->nullable();
+            $table->decimal('jumlah_pembayaran', 22, 2)->default(0)->nullable();
+            $table->decimal('sisa_pembayaran', 22, 2)->default(0)->nullable();
+            $table->decimal('pembayaran_bunga', 22, 2)->default(0)->nullable();
+            $table->decimal('pembayaran_denda', 22, 2)->default(0)->nullable();
+            $table->decimal('sisa_kredit', 22, 2)->default(0)->nullable();
+            $table->decimal('angsuran',22, 2)->default(0)->nullable();
             $table->timestamps();
         });
     }

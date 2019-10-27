@@ -26,25 +26,22 @@ Route::get('user-ubah', 'userscontroller@ubah')->name('edituser');
 Route::get('ubah-profile', 'usercontroller@ubahprofile')->name('datauser.profile');
 Route::get('detail/{id}', 'userscontroller@detail')->name('datauser.detail');
 
-// bunga kredit 
+// bunga kredit
 Route::resource('bunga', 'BungakreditController');
 
 // Debitur
 Route::resource('debitur', 'DebiturController');
+Route::get('debitur-detail', 'DebiturController@detail')->name('debitur-detail');
 
-// Angsuran 
+// Angsuran
 Route::resource('angsuran', 'AngsuranController');
 Route::get('/cari-transaksi', 'AngsuranController@cariTransaksi')->name('cari-transaksi');
-// Route::get('/sisa-pinjaman/{transaksi}/{jangka_waktu}', 'AngsuranController@getSisaPinjaman')->name('sisa-pinjaman');
 
 //transaksi
 Route::resource('transaksi', 'TransaksiController');
 Route::get('caribunga', 'TransaksiController@caribunga')->name('caribunga');
-// Route::get('/total-angsuran/{transaksi}/{biayabunga}', 'TransaksiController@getTotal')->name('total-angsuran');
-
-// Route::get('/biaya_pokok/{transaksi}/{biayabunga}', function(){return Response()->json('test');});
-
-// Route::get('/biaya_bunga/{transaksi}/{bunga}/{waktu}', 'TransaksiController@getBungaFlat')->name('biaya-bunga');
+Route::delete('transaksi/delete', 'TransaksiController@destroy');
+Route::get('transaksi-detail', 'TransaksiController@detail')->name('transaksi-detail');
 
 Route::get('/index-report','ReportTransaksi@index')->name('index-report');
 Route::post('/cetak-view','ReportTransaksi@tampil_data')->name('laporan_tampil');

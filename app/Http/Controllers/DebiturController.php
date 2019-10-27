@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\debitur;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
@@ -22,9 +23,15 @@ class DebiturController extends Controller
             $query->where('nama_roles', '=', 'Kreditur' );
         })->get();
         $detail_debit = debitur::all();
-        return view('backend/debitur/index', compact('debiturs','detail_debit'));
+
+        $deb = DB::table('debiturs')
+            ->join('users', 'debiturs.user_id', '=', 'users.id')
+            ->select('debiturs.*','users.*')
+            ->get();
+
+        return view('backend/debitur/index', compact('debiturs','detail_debit','deb'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +62,7 @@ class DebiturController extends Controller
         //     'email' => 'required',
         //     'no_telp' => 'required',
         // ]);
-        
+
         $users = user::create([
             'roles_id' => 3,
             'nama' => $request->nama,
@@ -73,7 +80,7 @@ class DebiturController extends Controller
             'no_ktp' => $request->no_ktp,
             'pekerjaan' => $request->pekerjaan,
         ]);
-        
+
 
         toastr()->success('Data berhasih ditambah', 'Pesan berhasil');
         return redirect()->route('debitur.index');
@@ -89,6 +96,22 @@ class DebiturController extends Controller
     public function show(debitur $debitur)
     {
         //
+        $debiturs = User::find($id);
+        $detail_debit = debitur::all();
+        return view('backend/debitur/ubah', compact('debiturs','detail_debit','deb'));
+    }
+
+    public function detail(Request $request)
+    {
+        //
+        $devbiturs = User::find($request->id);
+        $detail_debit = debitur::all();
+
+        $deb = debitur::select('debiturs.*','users.*')
+            ->join('users', 'debiturs.user_id', '=', 'users.id')
+            ->where('users.id', $request->id)
+            ->first();
+        return view('backend/debitur/detail', compact('debiturs','detail_debit','deb'));
     }
 
     /**
@@ -100,9 +123,14 @@ class DebiturController extends Controller
     public function edit($id)
     {
         //
-        $debiturs = User::find($id);
-        $detail_debit = debitur::all();
-        return view('backend/debitur/ubah', compact('debiturs','detail_debit'));
+        // $debiturs = User::find($id);
+        // $detail_debit = debitur::all();
+        $deb = debitur::select('debiturs.*','users.*')
+            ->join('users', 'debiturs.user_id', '=', 'users.id')
+            ->where('users.id', $id)
+            ->first();
+            // dd($deb);
+        return view('backend/debitur/ubah', compact('deb'));
     }
 
     /**

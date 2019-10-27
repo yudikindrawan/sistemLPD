@@ -8,14 +8,10 @@ use App\bungakredit;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
+use DB;
 
 class TransaksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
@@ -24,11 +20,6 @@ class TransaksiController extends Controller
         return view('backend/transaksi/index', compact('transaksis','users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -50,39 +41,49 @@ class TransaksiController extends Controller
         return view('backend/transaksi/add', compact('krediturs', 'bungas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $request->merge(['id' => 'TRNS'.rand(1,9999), 'tanggal_kredit' => Carbon::now()]);
+        $request->merge(['id' => 'TRNS'.rand(1,9999)]);
         $kredit = transaksi::create($request->all());
         toastr()->success('Data berhasih ditambah', 'Pesan berhasil');
         return redirect()->route('transaksi.index');
 
-        
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(transaksi $transaksi)
+    public function show(Request $req)
     {
         //
+        // $transaksi = transaksi::find($id);
+        // $user = user::all();
+        // $bunga = bungakredit::all();
+
+        $transaksi = transaksi::select('transaksis.*','users.*','bungakredits.*')
+        ->join('users','transaksis.users_id','=','users.id')
+        ->join('bungakredits','transaksis.bunga_id','=','bungakredits.id')
+        ->where('transaksis.id', $req->id)
+        ->first();
+
+        dd($transaksi);
+
+        return view('backend/transaksi/detail', compact('transaksi','user','bunga'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
+    public function detail(Request $request){
+      // $transaksi = transaksi::select('transaksis.*','users.*','bungakredits.*')
+      // ->join('users','transaksis.users_id','=','users.id')
+      // ->join('bungakredits','transaksis.bunga_id','=','bungakredits.id')
+      // ->where('transaksis.id', $request->id)
+      // ->first();
+      $transaksi = transaksi::find($request->id);
+      $user = user::all();
+      $bunga = bungakredit::all();
+
+      dd($transaksi);
+
+      return view('backend/transaksi/detail', compact('transaksi','user','bunga'));
+    }
+
     public function edit($id)
     {
         //
@@ -96,13 +97,6 @@ class TransaksiController extends Controller
         return view('backend/transaksi/ubah', compact('kredit','krediturs','bungas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
@@ -113,15 +107,12 @@ class TransaksiController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(transaksi $transaksi)
+    public function destroy(Request $req)
     {
         //
+        DB::table("transaksis")->delete($req->delete);
+        toastr()->success('Data berhasih dihapus', 'Pesan berhasil');
+        return redirect()->route('transaksi.index');
     }
 
     public function caribunga(Request $request)
@@ -139,7 +130,7 @@ class TransaksiController extends Controller
     // public function flat(transaksi $transaksi, $waktu)
     // {
     //     $hitPokok = $transaksi->jumlah_kredit / $waktu;
-        
+
     //     return Response()->json(['angsuran_pokok' => $hitPokok]);
     // }
 

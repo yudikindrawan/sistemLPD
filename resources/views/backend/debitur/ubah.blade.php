@@ -17,25 +17,25 @@
     <div class="row">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
-                <form class="" method="post" action="{{ route('debitur.update', $debiturs->id) }}" enctype="multipart/form-data">
+                <form class="" method="post" action="{{ route('debitur.update', $deb->id) }}" enctype="multipart/form-data">
                 {{csrf_field() }}
                     {{method_field('put')}}
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
-                            <input name="nama" id="nama" value="{{$debiturs->nama}}" type="text" class="form-control">
+                            <input name="nama" id="nama" value="{{$deb->nama}}" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">No KTP</label>
                         <div class="col-sm-10">
-                            <input name="no_ktp" id="no_ktp" value="{{$debiturs->no_ktp}}" type="text" class="form-control">
+                            <input name="no_ktp" id="no_ktp" value="{{$deb->no_ktp}}" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">E-mail</label>
                         <div class="col-sm-10">
-                            <input name="email" id="email" value="{{$debiturs->email}}" type="email" class="form-control">
+                            <input name="email" id="email" value="{{$deb->email}}" type="email" class="form-control">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
@@ -44,7 +44,7 @@
                             <select name="jk" id="jk" class="form-control select2"> 
                                 <option selected="selected" value="" disabled>Jenis Kelamin</option>
                             @foreach(["L" => "L", "P" => "P" ] AS $jk => $label)   
-                                <option value="{{$jk}}" {{old("jk", $debiturs->jk) == $jk ? "selected" : " "}}>{{$label}}</option>
+                                <option value="{{$jk}}" {{old("jk", $deb->jk) == $jk ? "selected" : " "}}>{{$label}}</option>
                             @endforeach
                             </select>
                         </div>
@@ -52,19 +52,19 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">No Telepon</label>
                         <div class="col-sm-10">
-                        <input name="no_telp" id="no_telp" value="{{$debiturs->no_telp}}" type="text" class="form-control">
+                        <input name="no_telp" id="no_telp" value="{{$deb->no_telp}}" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col-sm-10">
-                            <input name="tempat_lahir" id="examplePassword" value="{{$debiturs->tempat_lahir}}" type="text" class="form-control">
+                            <input name="tempat_lahir" id="examplePassword" value="{{$deb->tempat_lahir}}" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                         <div class="input-group col-sm-10">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" value="{{$debiturs->tanggal_lahir}}">
+                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" value="{{$deb->tanggal_lahir}}">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
@@ -73,7 +73,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Pekerjaan</label>
                         <div class="col-sm-10">
-                        <input name="pekerjaan" id="examplePassword" value="{{$debiturs->pekerjaan}}" type="text" class="form-control">
+                        <input name="pekerjaan" id="examplePassword" value="{{$deb->pekerjaan}}" type="text" class="form-control">
                         </div>
                     </div>
                         <!-- Validasi Image -->

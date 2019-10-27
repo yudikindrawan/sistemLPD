@@ -22,12 +22,12 @@ class CreateTransaksisTable extends Migration
             $table->string('tanggal_kredit')->nullable();
             $table->string('jaminan')->nullable();
             $table->string('jangka_waktu')->default(0);
-            $table->decimal('jumlah_kredit')->default(0);
-            $table->decimal('angsuran_pokok')->default(0);
-            $table->decimal('biaya_bunga')->default(0);
-            $table->decimal('total')->default(0);
-            $table->decimal('biaya_admin')->default(0)->nullable();
-            $table->decimal('biaya_materai')->default(0)->nullable();
+            $table->decimal('jumlah_kredit', 22, 2)->default(0);
+            $table->decimal('angsuran_pokok', 22, 2)->default(0);
+            $table->decimal('biaya_bunga', 22, 2)->default(0);
+            $table->decimal('total', 22, 2)->default(0);
+            $table->decimal('biaya_admin', 22, 2)->default(0)->nullable();
+            $table->decimal('biaya_materai', 22, 2)->default(0)->nullable();
             $table->timestamps();
         });
     }

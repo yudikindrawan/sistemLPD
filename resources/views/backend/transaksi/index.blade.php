@@ -11,11 +11,10 @@
             <div>Data Transaksi<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
         <div class="page-title-actions">
-            <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark"><i class="fa fa-star"></i></button>
                 <div class="d-inline-block ">
                     <a href="{{ route('transaksi.create') }}"><button type="button" aria-haspopup="true" aria-expanded="false" class="btn-shadow btn btn-primary"><span class="btn-icon-wrapper pr-2 opacity-7"><i class="pe-7s-plus fa-w-20"></i></span>Tambah</button></a>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 <div class="row">
@@ -48,19 +47,44 @@
                             <td>{{$transaksi->angsuran_pokok}}</td>
                             <td>{{$transaksi->jangka_waktu}}</td>
                             <td style="white-space: nowrap; ">
-                            <a href="{{ route('transaksi.edit', $transaksi->id)}}" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Ubah </a>
+                            <!-- <a href="{{ route('transaksi.edit', $transaksi->id)}}" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Ubah </a> -->
+                            <a data-toggle="modal" data-target="#exampleModal" data-hapus="{{ $transaksi->id }}" title="Delete" class="btn btn-danger btn-sm" style="color:white"><i class="pe-7s-trash"></i></a>
+
+                            <a onClick="modaldetailTriger('{{$transaksi->id}}')" data-toggle="modal" href="" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-note2"></i> Detail </a>
                             </td>
                         </tbody>
                         @endforeach
                     </table>
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 </div>
 </div>
 @endsection
 @push('scripts')
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <form action="transaksi/delete" method="post">
+    {{ csrf_field() }}
+        {{ method_field('delete') }}
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title" id="exampleModalLabel">Yakin ingin membatalkan transaksi transaksi?</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+            <input type="hidden" name="delete" id="delete"/>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">Batal</button>
+        </div>
+        </div>
+        </form>
+    </div>
+</div>
+
 <div class="modalKu"></div>
 <script>
     // MODAL EDIT
@@ -79,6 +103,22 @@
             }
         });
     }
+        // MODAL EDIT
+        function modaldetailTriger(id){
+            jQuery.noConflict();
+            $.ajax({
+                url     : "{{ route('transaksi-detail') }}",
+                method  : 'get',
+                data    : {
+                'id' : id
+                },
+                success : function(response){
+                // console.log(response);
+                    $('.modalKu').html(response);
+                    $('#detailtransaksi').modal({ backdrop: 'static', keyboard: false });
+                }
+            });
+        }
 </script>
 <script>
     /****************************************
@@ -87,4 +127,13 @@
     $('#zero_config').DataTable();
 
 </script>
+<script>
+$('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('hapus')
+    var modal = $(this)
+    modal.find('#delete').val(id)
+    })
+</script>
+
 @endpush
