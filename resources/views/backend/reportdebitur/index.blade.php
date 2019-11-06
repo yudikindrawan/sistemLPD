@@ -8,7 +8,7 @@
         <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
-            <div>Laporan Transaksi<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
+            <div>Laporan Debitur<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
         <div class="page-title-actions">
                 <div class="d-inline-block ">
@@ -27,7 +27,7 @@
                             <label>Date range:</label>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                <input type="text" class="form-control pull-right input_kredit" id="laporan_kredit" name="laporan_kredit">
+                                <input type="text" class="form-control pull-right input_kredit" id="laporan_debitur" name="laporan_kredit">
                             </div>
                         </div>
                     </div>
@@ -49,15 +49,12 @@
                 <table id="dataTrans" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>No Transaksi</th>
                             <th>Nama</th>
-                            <th>Tanggal</th>
-                            <th>Jumlah Kredit</th>
-                            <th>Angsuran Pokok</th>
-                            <th>Angsuran Bunga</th>
-                            <th>Jangka Waktu</th>
-                            <th>Biaya Admin</th>
-                            <th>Biaya Materai</th>
+                            <th>No KTP</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Email</th>
+                            <th>No Telp</th>
+                            <th>pekerjaan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,44 +128,38 @@
             "iDisplayLength" : 5,
             'paging'      : false,
             columns : [
-            {data : 'NoTransaksi'},
             {data : 'Nama'},
-            {data : 'Tanggal'},
-            {data : 'JumlahKredit'},
-            {data : 'AngsuranPokok'},
-            {data : 'AngsuranBunga'},
-            {data : 'JangkaWaktu'},
-            {data : 'BiayaAdmin'},
-            {data : 'BiayaMaterai'},
+            {data : 'NoKTP'},
+            {data : 'TanggalLahir'},
+            {data : 'Email'},
+            {data : 'NoTelp'},
+            {data : 'pekerjaan'},
             ]
         });
     });
 
     $(document).on('click', '#tampil', function(){
         var tanggal = {
-            'awal' : $('#laporan_kredit').data('daterangepicker').startDate.format('YYYY-MM-DD'),
-            'akhir' : $('#laporan_kredit').data('daterangepicker').endDate.format('YYYY-MM-DD')
+            'awal' : $('#laporan_debitur').data('daterangepicker').startDate.format('YYYY-MM-DD'),
+            'akhir' : $('#laporan_debitur').data('daterangepicker').endDate.format('YYYY-MM-DD')
         };
 
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             type: 'POST',
-            url: '{{route('laporan_tampil')}}',
+            url: '{{route('laporan-debitur-tampil')}}',
             data: tanggal,
             cache: false,
             success: function(response) {
                 console.log(response);
                 $.each(response, function(i, item){
                     var datas = [{
-                        'NoTransaksi' : item.id,
                         'Nama' : item.nama,
-                        'Tanggal' : item.tanggal_kredit,
-                        'JumlahKredit' : item.jumlah_kredit,
-                        'AngsuranPokok' : item.angsuran_pokok,
-                        'AngsuranBunga' : item.biaya_bunga,
-                        'JangkaWaktu' : item.jangka_waktu,
-                        'BiayaAdmin' : item.biaya_admin,
-                        'BiayaMaterai' : item.biaya_materai,
+                        'NoKTP' : item.no_ktp,
+                        'TanggalLahir' : item.tanggal_lahir,
+                        'Email' : item.email,
+                        'NoTelp' : item.no_telp,
+                        'pekerjaan' : item.pekerjaan,
                     }];
                 datas.forEach(function(data) {
                 tb.row.add(data).draw();
@@ -185,10 +176,10 @@
     });
 
     $(document).on('click', '#print', function(){
-        var awal = $('#laporan_kredit').data('daterangepicker').startDate.format('YYYY-MM-DD');
-        var akhir = $('#laporan_kredit').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        var awal = $('#laporan_debitur').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        var akhir = $('#laporan_debitur').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
-        var link = "/print/"+awal+"/"+akhir;
+        var link = "/print-debitur/"+awal+"/"+akhir;
         window.open(link);
     });
 </script>

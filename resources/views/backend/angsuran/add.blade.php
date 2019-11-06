@@ -17,13 +17,13 @@
     <div class="row">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
-                <form class="" method="post" action="{{ route('transaksi.store') }}" enctype="multipart/form-data" id="myForm">
+                <form class="" method="post" action="{{ route('angsuran.store') }}" enctype="multipart/form-data" id="myForm">
                 @csrf
                     <hr>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label jenis_bunga">No Transaksi</label>
                         <div class="col-sm-4">
-                            <select name="no_transaksi" id="no_transaksi" class="mb-2 form-control select2 @error('angsuran_ke') is-invalid @enderror no_transaksi">
+                            <select name="no_transaksi" id="no_transaksi" class="mb-2 form-control select2 @error('no_transaksi') is-invalid @enderror no_transaksi">
                                 <option selected="selected" value="" disabled>Pilih No Transaksi</option>
                             @foreach($transaksi as $trans)
                                 <option value="{{$trans->id}}">{{$trans->id}}</option>
@@ -31,10 +31,44 @@
                             </select>
                         </div>
                     </div>
+                    {{-- <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label">Nama Debitur</label>
+                        <div class="col-sm-10">
+                            <input  type="text" class="form-control @error('nama_debitur') is-invalid @enderror nama_debitur" name="nama_debitur" id="nama_debitur" disabled>
+                        </div>
+                    </div>
+                                @error('nama_debitur')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror --}}
+                    {{-- <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label">Tanggal Awal Kredit</label>
+                        <div class="col-sm-10">
+                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror tanggal_kredit" name="tanggal_kredit" id="tanggal_kredit" disabled>
+                        </div>
+                    </div>
+                                @error('jumlah_kredit')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror --}}
+                      <div class="position-relative row form-group">
+                          <label for="examplePassword" class="col-sm-2 col-form-label">Tanggal Pembayaran</label>
+                          <div class="col-sm-10">
+                              <input  type="text" class="form-control @error('tanggal_pembayaran') is-invalid @enderror datepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" >
+                          </div>
+                      </div>
+                                            @error('tanggal_pembayaran')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                    <hr>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" disabled>
+                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" readonly>
                         </div>
                     </div>
                                 @error('jumlah_kredit')
@@ -45,7 +79,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Biaya Bunga</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="jmlkredit" disabled>
+                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="biayabunga" readonly>
                         </div>
                     </div>
                                 @error('biaya_bunga')
@@ -56,10 +90,10 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Total Pembayaran</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('total_pembayaran') is-invalid @enderror total_pembayaran" name="total_pembayaran" id="total_pembayaran" disabled>
+                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror total_pembayaran" name="jumlah_pembayaran" id="jumlah_pembayaran" readonly>
                         </div>
                     </div>
-                                @error('total_pembayaran')
+                                @error('biaya_bunga')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -67,7 +101,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Sisa Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pinjaman" id="jmlkredit" disabled>
+                            <input  type="text" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pembayaran" id="jmlkredit" >
                         </div>
                     </div>
                                 @error('sisa_pinjaman')
@@ -87,11 +121,24 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                  <div class="position-relative row form-group">
+                      <label for="examplePassword" class="col-sm-2 col-form-label angsuran_pokok">Angsuran Pokok</label>
+                      <div class="col-sm-4">
+                          <div class="input-group-append">
+                              <input type="text" class="form-control @error('angsuran_pokok') is-invalid @enderror angsuran_pokok" name="angsuran_pokok" id="angsuran_pokok">
+                          </div>
+                      </div>
+                  </div>
+                              @error('angsuran_pokok')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_pokok">Jumlah Pokok</label>
                         <div class="col-sm-4">
                             <div class="input-group-append">
-                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror" name="jumlah_pokok" id="jumlah_pokok">
+                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror jumlah_pokok" name="jumlah_pokok" id="jumlah_pokok" value="">
                             </div>
                         </div>
                     </div>
@@ -100,11 +147,12 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_bunga">Jumlah Bunga</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text" class="form-control @error('jumlah_bunga') is-invalid @enderror" name="jumlah_bunga" id="jumlah_bungas">
+                                <input type="text" class="form-control @error('jumlah_bunga') is-invalid @enderror jumla" name="jumlah_bunga" id="jumlah_bunga" value="">
                             </div>
                         </div>
                     </div>
@@ -117,11 +165,24 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label total">Total yang harus di bayar</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text" class="form-control @error('total') is-invalid @enderror" name="total" id="total">
+                                <input type="text" class="form-control @error('total') is-invalid @enderror" name="total_bayar" id="total_bayar">
                             </div>
                         </div>
                     </div>
                                 @error('bunga')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label jumlah_pokok">Denda</label>
+                        <div class="col-sm-4">
+                            <div class="input-group-append">
+                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror denda" name="denda" id="denda">
+                            </div>
+                        </div>
+                    </div>
+                                @error('jumlah_pokok')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -144,10 +205,17 @@
 @endsection
 @push('scripts')
 <script>
-    $(document).on('change','.no_transaksi',function () {
-        var id=$(this).val();
 
+    $(document).on('change','.no_transaksi',function () {
+
+        var id=$(this).val();
         var a=$(this).parent();
+
+        var angsuranPokok = ($('#jumlah_pokok').val());
+        var biayaBunga = ($('#jumlah_bunga').val());
+        // console.log(Jpokok + Jbunga);
+        // var Total = (parseInt(angsuranPokok) + parseInt(biayaBunga));
+        // console.log(Jpokok);
         console.log(id);
         var op="";
         $.ajax({
@@ -160,20 +228,75 @@
             console.log(data.biaya_bunga);
             console.log(data.total);
             console.log(data.jangka_waktu);
+            console.log(data.angsuran_pokok);
+            console.log(data.tanggal_kredit);
+            console.log(data.angsuran_pokok);
+            console.log(data.biaya_bunga);
+            console.log(data.nama);
 
+            $('.tanggal_kredit').val(data.tanggal_kredit);
+            $('.nama_debitur').val(data.nama);
+            $('.angsuran_pokok').val(data.angsuran_pokok);
+            $('.sisa_pinjaman').val(data.jumlah_kredit);
             $('.jumlah_kredit').val(data.jumlah_kredit);
             $('.biaya_bunga').val(data.biaya_bunga);
             $('.total_pembayaran').val(data.total);
             $('.angsuranKe').val(data.jangka_waktu);
+
+
+            $('#jumlah_pokok').val(data.angsuran_pokok);
+            $('#jumlah_bunga').val(data.biaya_bunga);
+            $('#total_bayar').val(parseFloat(angsuranPokok) + parseFloat(biayaBunga));
+
         },
         error:function(){
-
+          alert('error')
         }
+
         });
+
     });
+    // $(document).ready(function(){
+    //   var angsuranPokok = ($('#jumlah_pokok').val());
+    //   var biayaBunga = ($('#jumlah_bunga').val());
+    //   console.log(angsuranPokok);
+    //   var Total = (parseInt(angsuranPokok) + parseInt(biayaBunga));
+    //   $('#total_bayar').val(Total);
+    // });
+
+//     function hitung() {
+//       var a = $("#jumlah_pokok").val();
+//       var b = $("#jumlah_bunga").val();
+//         console.log(a);
+//         console.log(b);
+//       c = a + b; //a tambah b
+//       $("#total_bayar").val(c);
+//
+// }
+
+    // function getTotal(){
+    //   jumPokok = $(document). find('input[name=jumlah_pokok]').val() || 0;
+    //   jumBunga = $(document). find('input[name=jumlah_bunga]').val() || 0;
+    //   console.log(jumPokok);
+    //   $(document).find('input[name=total_bayar]').val(jumPokok + jumBunga);
+    // }
+    //
+    // $(document).on('input','input[name=jumlah_pokok]', function() {
+    //     getTotal();
+    // });
+    //
+    // $(document).on('input','input[name=jumlah_bunga]', function() {
+    //     getTotal();
+    // });
+
 </script>
 <script>
         $('.select2').select2();
+
+        jQuery('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            autoclose: true,
+        });
 </script>
 
 {{-- <script>

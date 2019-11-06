@@ -10,10 +10,10 @@
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
             <div>Ubah Data Bunga<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
-        <div class="page-title-actions"> 
-            </div>    
+        <div class="page-title-actions">
+            </div>
         </div>
-    </div>            
+    </div>
     <div class="row">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
@@ -29,9 +29,9 @@
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Jenis Bunga</label>
                         <div class="col-sm-10">
-                            <select name="jenis_bunga" id="jenis_bunga" class="form-control select2"> 
+                            <select name="jenis_bunga" id="jenis_bunga" class="form-control select2">
                                 <option selected="selected" value="" disabled>Jenis Bunga</option>
-                            @foreach(["FlateRate" => "FlateRate", "Anuitas" => "Anuitas", "Sliding" => "Sliding", "FloatingRate" => "FloatingRate" ] AS $bunga => $label)   
+                            @foreach(["Tetap" => "Tetap", "Menurun" => "Menurun" ] AS $bunga => $label)   
                                 <option value="{{$bunga}}" {{ old("jenis_bunga", $bungas->jenis_bunga) == $bunga ? "selected" : " "}}>{{$label}}</option>
                             @endforeach
                             </select>

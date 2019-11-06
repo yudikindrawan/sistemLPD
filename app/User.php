@@ -18,11 +18,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'roles_id',
-        'nama', 
-        'email', 
-        'password', 
-        'username', 
-        'no_telp', 
+        'nama',
+        'email',
+        'password',
+        'username',
+        'no_telp',
         'tempat_lahir',
         'tanggal_lahir',
         'foto',
@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->hasMany(angsuran::class);
     }
     public function transaksi(){
-        return $this->hasMany(transaksi::class);
+        return $this->hasMany('App\transaksi','users_id');
     }
     public function debitur(){
         return $this->hasOne(debitur::class);

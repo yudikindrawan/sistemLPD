@@ -9,12 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use DB;
+use PDF;
 
 class TransaksiController extends Controller
 {
-    public function index()
-    {
-        //
+    public function index(){
         $transaksis = transaksi::all();
         $users = User::all();
         return view('backend/transaksi/index', compact('transaksis','users'));
@@ -22,21 +21,9 @@ class TransaksiController extends Controller
 
     public function create()
     {
-        //
-        // $transaksis = transaksi::all();
-        // $transaksis = User::select('roles_id == 1')->first();
-            // $transaksis = User::whereHas('roles', function($q){
-            //     $q->where('nama_roles', 'PegawaiLPD');
-            // })->get();
-
-            $krediturs = User::whereHas('roles', function($q){
-                $q->where('nama_roles', 'Kreditur');
-            })->get();
-
-        // $krediturs = User::select('roles_id == 3')->first();
-        // $transaksis = transaksi::all();
-        // $users = User::all();
-        // $krediturs = user::all();
+        $krediturs = User::whereHas('roles', function($q){
+            $q->where('nama_roles', 'Kreditur');
+        })->get();
         $bungas = bungakredit::all();
         return view('backend/transaksi/add', compact('krediturs', 'bungas'));
     }
@@ -47,17 +34,9 @@ class TransaksiController extends Controller
         $kredit = transaksi::create($request->all());
         toastr()->success('Data berhasih ditambah', 'Pesan berhasil');
         return redirect()->route('transaksi.index');
-
-
     }
 
-    public function show(Request $req)
-    {
-        //
-        // $transaksi = transaksi::find($id);
-        // $user = user::all();
-        // $bunga = bungakredit::all();
-
+    public function show(Request $req){
         $transaksi = transaksi::select('transaksis.*','users.*','bungakredits.*')
         ->join('users','transaksis.users_id','=','users.id')
         ->join('bungakredits','transaksis.bunga_id','=','bungakredits.id')
@@ -70,25 +49,15 @@ class TransaksiController extends Controller
     }
 
     public function detail(Request $request){
-      // $transaksi = transaksi::select('transaksis.*','users.*','bungakredits.*')
-      // ->join('users','transaksis.users_id','=','users.id')
-      // ->join('bungakredits','transaksis.bunga_id','=','bungakredits.id')
-      // ->where('transaksis.id', $request->id)
-      // ->first();
-      $transaksi = transaksi::find($request->id);
-      $user = user::all();
-      $bunga = bungakredit::all();
+        $transaksi = transaksi::find($request->id);
+        $user = user::all();
+        $bunga = bungakredit::all();
 
-      dd($transaksi);
-
-      return view('backend/transaksi/detail', compact('transaksi','user','bunga'));
+        return view('backend/transaksi/detail', compact('transaksi','user','bunga'));
     }
 
-    public function edit($id)
-    {
-        //
+    public function edit($id){
         $kredit = transaksi::find($id);
-        // dd($kredit);
         $krediturs = User::whereHas('roles', function($q){
             $q->where('nama_roles', 'Kreditur');
         })->get();
@@ -97,26 +66,20 @@ class TransaksiController extends Controller
         return view('backend/transaksi/ubah', compact('kredit','krediturs','bungas'));
     }
 
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
         $kredit = transaksi::find($id);
         $kredit->fill($request->all())->save();
         toastr()->success('Data berhasih diubah', 'Pesan berhasil');
         return redirect()->route('transaksi.index');
-
     }
 
-    public function destroy(Request $req)
-    {
-        //
+    public function destroy(Request $req){
         DB::table("transaksis")->delete($req->delete);
         toastr()->success('Data berhasih dihapus', 'Pesan berhasil');
         return redirect()->route('transaksi.index');
     }
 
-    public function caribunga(Request $request)
-    {
+    public function caribunga(Request $request) {
         $p = bungakredit::select('bunga')->where('id',$request->id)->first();
 
         return Response()->json($p);
@@ -124,8 +87,16 @@ class TransaksiController extends Controller
 
     public function getTotal(transaksi $transaksi, $biayabunga){
         $total = $transaksi->angsuran_pokok + $biayabunga;
-
         return Response()->json(['total' => $total]);
+    }
+
+    public function cetakBuktiTransaksi(Request $request, $id){
+        $transaksi = transaksi::find($id);
+        $users = User::all();
+        $customPaper = array(0,0,660,560);
+        $pdf = PDF::loadview('backend/transaksi/cetakBuktiTransaksi', compact('transaksi','users'))->setPaper($customPaper, 'potrait');
+        return $pdf->download('Cetak-bukti-transfer.pdf');
+
     }
     // public function flat(transaksi $transaksi, $waktu)
     // {

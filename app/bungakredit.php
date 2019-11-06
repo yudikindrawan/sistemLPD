@@ -11,6 +11,6 @@ class bungakredit extends Model
     protected $fillable = ['bunga','jenis_bunga'];
 
     public function transaksi(){
-        return $this->hasMany(transaksi::class);
+        return $this->hasMany(transaksi::class,'bunga_id');
     }
 }

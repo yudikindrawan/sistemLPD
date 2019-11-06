@@ -27,18 +27,21 @@
                     </thead>
                     <tbody>
                         <td>{{ $transaksi->id}}</td>
-                        <td>{{ $transaksi->nama}}</td>
-                        <td>{{ $transaksi->jenis_bunga}}</td>
+                        <td>{{ $transaksi->User->nama}}</td>
+                        <td>{{ $transaksi->bungakredit->jenis_bunga}}</td>
                         <td>{{ $transaksi->tanggal_kredit}}</td>
-                        <td>{{ $transaksi->jangka_waktu}}</td>
-                        <td>{{ $transaksi->jumlah_kredit}}</td>
-                        <td>{{ $transaksi->angsuran_pokok}}</td>
-                        <td>{{ $transaksi->biaya_bunga}}</td>
-                        <td>{{ $transaksi->total}}</td>
-                        <td>{{ $transaksi->biaya_admin}}</td>
-                        <td>{{ $transaksi->biaya_materai}}</td>
+                        <td>{{ $transaksi->jangka_waktu}} Bulan</td>
+                        <td>Rp.{{ number_format( $transaksi->jumlah_kredit,2) }}</td>
+                        <td>Rp.{{ number_format( $transaksi->angsuran_pokok,2) }}</td>
+                        <td>Rp.{{ number_format( $transaksi->biaya_bunga,2) }}</td>
+                        <td>Rp.{{ number_format( $transaksi->total,2) }}</td>
+                        <td>Rp.{{ number_format( $transaksi->biaya_admin,2) }}</td>
+                        <td>Rp.{{ number_format( $transaksi->biaya_materai,2) }}</td>
                     </tbody>
                 </table>
+            </div>
+            <div class="modal-footer">
+                <a href="{{route('cetak-bukti-transfer', $transaksi->id)}}" class="btn btn-primary btn-lg">Cetak Bukti Transaksi</a>
             </div>
         </div>
     </div>

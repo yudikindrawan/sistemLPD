@@ -8,32 +8,27 @@
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
-            <div>Ubah Profile<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
+            <div>Ubah Data User<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
-        <div class="page-title-actions"> 
+        <div class="page-title-actions">
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="main-card mb-3 card col-md-4">
-            <div class="card-body">
-                
-            </div>
-        </div>
-        <div class="main-card mb-3 card col-md-8">
+        <div class="main-card mb-3 card col-md-12">
             <div class="card-body">
                 <form class="" method="post" action="{{ route('datauser.profile', $users->id ) }}" enctype="multipart/form-data">
                 {{csrf_field() }}
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
-                            <input name="name" id="name" placeholder="Masukkan Nama Lengkap" type="text" class="form-control">
+                            <input name="name" id="name" placeholder="Masukkan Nama Lengkap" type="text" class="form-control" value="{{$users->nama}}">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <input name="username" id="username" placeholder="Masukkan Username" type="text" class="form-control">
+                            <input name="username" id="username" placeholder="Masukkan Username" type="text" class="form-control" value="{{$users->username}}">
                         </div>
                     </div>
                     <!-- <div class="position-relative row form-group">
@@ -45,10 +40,15 @@
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Roles</label>
                         <div class="col-sm-10">
-                            <select name="roles_id" id="roles_id" class="form-control select2"> 
+                            <select name="roles_id" id="roles_id" class="form-control select2">
                                 <option selected="selected" value="" disabled>Pilih Jabatan</option>
-                            @foreach($roles as $role)   
-                                <option value="{{$role->id}}">{{$role->nama_roles}}</option>
+                            @foreach($roles as $role)
+                                <option value="{{$role->id}}"
+                                    @if ($role->id === $users->roles_id)
+                                      selected
+                                    @endif
+                                  >{{$role->nama_roles}}
+                                </option>
                             @endforeach
                             </select>
                         </div>
@@ -56,9 +56,9 @@
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-10">
-                            <select name="jk" id="jk" class="form-control select2"> 
+                            <select name="jk" id="jk" class="form-control select2">
                                 <option selected="selected" value="" disabled>Jenis Kelamin</option>
-                            @foreach(["L" => "L", "P" => "P" ] AS $jk => $label)   
+                            @foreach(["L" => "L", "P" => "P" ] AS $jk => $label)
                                 <option value="{{$jk}}" {{old("jk", $users->jk) == $jk ? "selected" : " "}}>{{$label}}</option>
                             @endforeach
                             </select>
@@ -67,16 +67,22 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col-sm-10">
-                            <input name="tempat_lahir" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control">
+                            <input name="tempat_lahir" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control" value="{{$users->tempat_lahir}}">
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                         <div class="input-group col-sm-10">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir">
+                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" value="{{$users->tanggal_lahir}}">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label">E-mail</label>
+                        <div class="col-sm-10">
+                            <input name="email" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control" value="{{$users->email}}">
                         </div>
                     </div>
                         <!-- Validasi Image -->
@@ -90,7 +96,7 @@
                                 </ul>
                             </div>
                         @endif --}}
-                        <!-- End of Validasi Images -->   
+                        <!-- End of Validasi Images -->
                     {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">File Upload</label>
                         <div class="col-md-10">

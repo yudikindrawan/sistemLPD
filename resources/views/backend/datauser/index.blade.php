@@ -14,7 +14,7 @@
                 <div class="d-inline-block ">
                     <a href="{{ route('datauser.create') }}"><button type="button" aria-haspopup="true" aria-expanded="false" class="btn-shadow btn btn-primary"><span class="btn-icon-wrapper pr-2 opacity-7"><i class="pe-7s-plus fa-w-20"></i></span>Tambah</button></a>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 <div class="row">
@@ -43,13 +43,14 @@
                               <td style="white-space: nowrap; ">
                                 <a onClick="modalEditTriger( {{ $user->id }} )" data-toggle="modal" class="btn btn-warning btn-sm"><i class="pe-7s-refresh"></i> Reset</a>
                                 <a href="{{ route('datauser.detail', $user->id ) }}" class="btn btn-info btn-sm"><i class="pe-7s-user"></i> Detail</a>
+                                <a href="{{ route('datauser.edit', $user->id ) }}" class="btn btn-primary btn-sm" style="color:white"><i class="pe-7s-pen"></i> Ubah </a>
                               </td>
                           </tbody>
                           @endforeach
                       </table>
                   </div>
               </div>
-          </div>    
+          </div>
       </div>
   </div>
 </div>

@@ -8,7 +8,7 @@ class transaksi extends Model
 {
     //
     protected $table = 'transaksis';
-    
+
     protected $fillable = [
         'id',
         'users_id',
@@ -22,16 +22,16 @@ class transaksi extends Model
         'total',
         'biaya_admin',
         'biaya_materai'];
-        
+
     public $incrementing = false;
 
     public function angsuran(){
         return $This->hasMany(angusuran::class);
     }
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\User','users_id');
     }
     public function bungakredit(){
-        return $this->belongsTo(bungakredit::class);
+        return $this->belongsTo(bungakredit::class,'bunga_id');
     }
 }

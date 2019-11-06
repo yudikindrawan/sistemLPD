@@ -36,7 +36,7 @@ class ReportTransaksi extends Controller
             ->whereBetween('transaksis.created_at', [$awal,$akhir])
             ->select('transaksis.*', 'users.nama', 'bungakredits.jenis_bunga')
             ->get();
-        $pdf = PDF::loadview('backend/report/reportTransaksi', compact('trans'));
+        $pdf = PDF::loadview('backend/report/reportTransaksi', compact('trans','awal','akhir'));
         return $pdf->download('laporan-transaksi.pdf');
     }
 }

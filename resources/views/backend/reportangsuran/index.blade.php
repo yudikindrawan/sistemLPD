@@ -8,7 +8,7 @@
         <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
-            <div>Laporan Transaksi<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
+            <div>Laporan Angsuran<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
         <div class="page-title-actions">
                 <div class="d-inline-block ">
@@ -27,7 +27,7 @@
                             <label>Date range:</label>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                <input type="text" class="form-control pull-right input_kredit" id="laporan_kredit" name="laporan_kredit">
+                                <input type="text" class="form-control pull-right input_kredit" id="laporan_angsuran" name="laporan_kredit">
                             </div>
                         </div>
                     </div>
@@ -50,14 +50,12 @@
                     <thead>
                         <tr>
                             <th>No Transaksi</th>
-                            <th>Nama</th>
-                            <th>Tanggal</th>
-                            <th>Jumlah Kredit</th>
-                            <th>Angsuran Pokok</th>
-                            <th>Angsuran Bunga</th>
-                            <th>Jangka Waktu</th>
-                            <th>Biaya Admin</th>
-                            <th>Biaya Materai</th>
+                            <th>Tanggal Pembayaran</th>
+                            <th>Jumlah Pembayaran</th>
+                            <th>Sisa Pembayaran</th>
+                            <th>Pembayaran Kredit</th>
+                            <th>Pembayaran Bunga</th>
+                            <th>Angsuran</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -132,43 +130,39 @@
             'paging'      : false,
             columns : [
             {data : 'NoTransaksi'},
-            {data : 'Nama'},
-            {data : 'Tanggal'},
-            {data : 'JumlahKredit'},
-            {data : 'AngsuranPokok'},
-            {data : 'AngsuranBunga'},
-            {data : 'JangkaWaktu'},
-            {data : 'BiayaAdmin'},
-            {data : 'BiayaMaterai'},
+            {data : 'TanggalPembayaran'},
+            {data : 'JumlahPembayaran'},
+            {data : 'SisaPembayaran'},
+            {data : 'PembayaranKredit'},
+            {data : 'PembayaranBunga'},
+            {data : 'Angsuran'}
             ]
         });
     });
 
     $(document).on('click', '#tampil', function(){
         var tanggal = {
-            'awal' : $('#laporan_kredit').data('daterangepicker').startDate.format('YYYY-MM-DD'),
-            'akhir' : $('#laporan_kredit').data('daterangepicker').endDate.format('YYYY-MM-DD')
+            'awal' : $('#laporan_angsuran').data('daterangepicker').startDate.format('YYYY-MM-DD'),
+            'akhir' : $('#laporan_angsuran').data('daterangepicker').endDate.format('YYYY-MM-DD')
         };
 
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             type: 'POST',
-            url: '{{route('laporan_tampil')}}',
+            url: '{{route('laporan-angsuran-tampil')}}',
             data: tanggal,
             cache: false,
             success: function(response) {
                 console.log(response);
                 $.each(response, function(i, item){
                     var datas = [{
-                        'NoTransaksi' : item.id,
-                        'Nama' : item.nama,
-                        'Tanggal' : item.tanggal_kredit,
-                        'JumlahKredit' : item.jumlah_kredit,
-                        'AngsuranPokok' : item.angsuran_pokok,
-                        'AngsuranBunga' : item.biaya_bunga,
-                        'JangkaWaktu' : item.jangka_waktu,
-                        'BiayaAdmin' : item.biaya_admin,
-                        'BiayaMaterai' : item.biaya_materai,
+                        'NoTransaksi' : item.transaksi_id,
+                        'TanggalPembayaran' : item.tanggal_pembayaran,
+                        'JumlahPembayaran' : item.jumlah_pembayaran,
+                        'SisaPembayaran' : item.sisa_pembayaran,
+                        'PembayaranKredit' : item.sisa_kredit,
+                        'PembayaranBunga' : item.pembayaran_bunga,
+                        'Angsuran' : item.angsuran,
                     }];
                 datas.forEach(function(data) {
                 tb.row.add(data).draw();
@@ -185,10 +179,10 @@
     });
 
     $(document).on('click', '#print', function(){
-        var awal = $('#laporan_kredit').data('daterangepicker').startDate.format('YYYY-MM-DD');
-        var akhir = $('#laporan_kredit').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        var awal = $('#laporan_angsuran').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        var akhir = $('#laporan_angsuran').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
-        var link = "/print/"+awal+"/"+akhir;
+        var link = "/print-angsuran/"+awal+"/"+akhir;
         window.open(link);
     });
 </script>

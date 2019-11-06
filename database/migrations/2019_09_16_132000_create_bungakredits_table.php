@@ -16,7 +16,7 @@ class CreateBungakreditsTable extends Migration
         Schema::create('bungakredits', function (Blueprint $table) {
             $table->Increments('id');
             $table->integer('bunga')->nullable();
-            $table->enum('jenis_bunga', ['FlateRate','Anuitas','Sliding','FloatingRate'])->nullable();
+            $table->enum('jenis_bunga', ['Tetap','Menurun'])->nullable();
             $table->timestamps();
         });
     }

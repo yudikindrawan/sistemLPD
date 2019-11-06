@@ -15,8 +15,6 @@ class CreateAngsuransTable extends Migration
     {
         Schema::create('angsurans', function (Blueprint $table) {
             $table->Increments('id');
-            $table->unsignedinteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('transaksi_id');
             $table->string('tanggal_pembayaran')->nullable();
             $table->decimal('jumlah_pembayaran', 22, 2)->default(0)->nullable();

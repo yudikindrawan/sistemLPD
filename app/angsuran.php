@@ -9,10 +9,10 @@ class angsuran extends Model
     //
     protected $table = 'angsurans';
     protected $fillable = [
-        'users_id',
         'transaksi_id',
         'tanggal_pembayaran',
         'jumlah_pembayaran',
+        'sisa_pembayaran',
         'pembayaran_bunga',
         'pembayaran_denda',
         'sisa_kredit',

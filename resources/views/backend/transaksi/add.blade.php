@@ -269,23 +269,22 @@
     $(document).ready(function(){
         $("#bunga_id").change(function(){
             var pokokpinjaman = parseFloat($('#jmlkredit').val(), 10);
-            var jangkawaktu = ($('#bungas').val());
-            var bungakredit = ($('#jnkwaktu').val());
-            var biayaAdmin = 3000;
-            var biayamaterai = 10000;
+            var bungakredit = ($('#bungas').val());
+            var jangkawaktu = ($('#jnkwaktu').val());
+            var biayaAdmin = 2500;
+            var biayamaterai = 6000;
             var str= [];
+            var parbunga = bungakredit / 100;
             $.each($(".jenisbunga option:selected"), function(){
                 str.push($(this).val())
             });
             if (str == 1) {
                 // alert("ini" + str.join(", "));
-                var total_flat = (pokokpinjaman * bungakredit) / jangkawaktu;
+                var total_flat = (pokokpinjaman * parbunga) / jangkawaktu;
                 $('#biaya_bunga').val(total_flat);
                 $('#biaya_admin').val(biayaAdmin);
                 $('#biaya_materai').val(biayamaterai);
             }else if(str == 2){
-
-            }else if(str ==3){
 
             }else{
 
@@ -334,8 +333,6 @@ $(document).ready(function(){
                 $('#displaykredit').append('<tr><td>Bulan ke-' + i + '</td><td>Rp. ' + addCommas(angsuranbunga_flat) + '</td><td>Rp. ' + addCommas(pokokpinjaman) + '</td><td>Rp. ' + addCommas(total_angsuranflat) + '</td><td>Rp. ' + addCommas(jmlkredit) + ' </td></tr>');
             }
         }else if(jenis == 2){
-            alert("ini" + jenis.join(", "));
-        }else if(jenis == 3){
             for (let a = 1; a <= jnkwaktu; a++) {
 
                 kreditEfektif = (jmlkredit - ( a - 1) * pokokpinjaman) * bunga / 12;
@@ -343,8 +340,6 @@ $(document).ready(function(){
                 jmlkredit = jmlkredit - cicilanbulan;
                 $('#displaykredit').append('<tr><td>Bulan ke-' + a + '</td><td>' + addCommas(kreditEfektif) + '</td><td>' + addCommas(pokokpinjaman) + '</td><td>' + addCommas(cicilanbulan) + '</td><td> ' + addCommas(jmlkredit) + ' </td></tr>');
             }
-        }else if(jenis == 4){
-            alert("ini" + jenis.join(", "));
         }else{
             alert("Tidak ada jenis bunga" + jenis.join(", "));
         }

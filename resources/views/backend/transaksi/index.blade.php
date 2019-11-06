@@ -41,14 +41,14 @@
                         <tbody>
                             <td>{{$i}}</td>
                             <td>{{$transaksi->id}}</td>
-                            <td>{{$transaksi->users_id}}</td>
+                            <td>{{$transaksi->User->nama}}</td>
                             <td>{{$transaksi->created_at}}</td>
-                            <td>{{$transaksi->jumlah_kredit}}</td>
-                            <td>{{$transaksi->angsuran_pokok}}</td>
-                            <td>{{$transaksi->jangka_waktu}}</td>
+                            <td>Rp. {{ number_format($transaksi->jumlah_kredit ,2) }}</td>
+                            <td>Rp. {{ number_format($transaksi->angsuran_pokok ,2) }}</td>
+                            <td>{{$transaksi->jangka_waktu}} Bulan</td>
                             <td style="white-space: nowrap; ">
                             <!-- <a href="{{ route('transaksi.edit', $transaksi->id)}}" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-refresh"></i> Ubah </a> -->
-                            <a data-toggle="modal" data-target="#exampleModal" data-hapus="{{ $transaksi->id }}" title="Delete" class="btn btn-danger btn-sm" style="color:white"><i class="pe-7s-trash"></i></a>
+                            <a data-toggle="modal" data-target="#exampleModal" data-hapus="{{ $transaksi->id }}" title="Batal Transaksi" class="btn btn-warning btn-sm" style="color:white"><i class="pe-7s-close"></i></a>
 
                             <a onClick="modaldetailTriger('{{$transaksi->id}}')" data-toggle="modal" href="" class="btn btn-info btn-sm" style="color:white"><i class="pe-7s-note2"></i> Detail </a>
                             </td>
@@ -76,7 +76,6 @@
             </button>
         </div>
             <input type="hidden" name="delete" id="delete"/>
-
         <div class="modal-footer">
             <button type="submit" class="btn btn-danger">Batal</button>
         </div>

@@ -61,7 +61,7 @@ class userscontroller extends Controller
             'email' => $request->email,
             'no_telp' => $request->no_telp,
         ])->save();
-        
+
         toastr()->success('Data berhasih ditambah', 'Pesan berhasil');
         return redirect('datauser');
     }
@@ -86,7 +86,7 @@ class userscontroller extends Controller
     public function edit(Request $request, $id)
     {
         //
-        $users = user::find($id); 
+        $users = user::find($id);
         $roles = roles::all();
         return view('backend/datauser/ubah', compact('users','roles'));
     }
@@ -130,6 +130,20 @@ class userscontroller extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function ubahprofile(Request $request, $id){
+      $users = user::find($id);
+      $users->nama = $request->name;
+      $users->username = $request->username;
+      $users->roles_id = $request->roles_id;
+      $users->tempat_lahir = $request->tempat_lahir;
+      $users->tanggal_lahir = $request->tanggal_lahir;
+      $users->jk = $request->jk;
+      $users->email = $request->email;
+      $users->no_telp = $request->no_telp;
+      $users->save();
+      toastr()->success('Data berhasih diubah', 'Pesan berhasil');
+      return redirect()->route('datauser.index');
     }
 
     public function detail(Request $request, $id){

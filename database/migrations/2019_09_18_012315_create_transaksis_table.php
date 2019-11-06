@@ -28,6 +28,7 @@ class CreateTransaksisTable extends Migration
             $table->decimal('total', 22, 2)->default(0);
             $table->decimal('biaya_admin', 22, 2)->default(0)->nullable();
             $table->decimal('biaya_materai', 22, 2)->default(0)->nullable();
+            $table->enum('status_tunggakan', ['Lancar','Macet'])->default('Lancar');;
             $table->timestamps();
         });
     }
