@@ -1,15 +1,17 @@
 <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <div class=""><img width="42" class="rounded-circle" src="{{ asset ('lpd.jpg')}}" alt=""><b> LPD Desa Tojan</b></div>
-                <div class="header__pane ml-auto">
-                    <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
+                <div class=""><a href="{{route('dashboard')}}" style="text-decoration:none;"><img width="42" class="rounded-circle" src="{{ asset ('lpd.jpg')}}" alt=""><b> LPD Desa Tojan</b></a></div>
+                @if (Auth::user()->roles_id != 3)
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
             <div class="app-header__mobile-menu">
                 <div>
@@ -58,7 +60,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                  <br>
+                                    <br>
                                     <div class="widget-heading">
                                         Hai, {{ Auth::user()->nama}}
                                     </div>

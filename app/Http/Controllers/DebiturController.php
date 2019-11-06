@@ -11,14 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class DebiturController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('roles:PegawaiLPD');
+    }
+
     public function index()
     {
-        //
         $debiturs = User::whereHas('roles', function(Builder $query){
             $query->where('nama_roles', '=', 'Kreditur' );
         })->get();
@@ -32,37 +31,12 @@ class DebiturController extends Controller
         return view('backend/debitur/index', compact('debiturs','detail_debit','deb'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
         $debiturs = debitur::all();
         return view('backend/debitur/add', compact('debiturs'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        // $request->validate([
-        //     'nama' => 'required',
-        //     'username' => 'required',
-        //     'tempat_lahir' => 'required',
-        //     'tanggal_lahir' => 'required',
-        //     'jk' => 'required',
-        //     'email' => 'required',
-        //     'no_telp' => 'required',
-        // ]);
-
+    public function store(Request $request){
         $users = user::create([
             'roles_id' => 3,
             'nama' => $request->nama,
@@ -80,30 +54,17 @@ class DebiturController extends Controller
             'no_ktp' => $request->no_ktp,
             'pekerjaan' => $request->pekerjaan,
         ]);
-
-
         toastr()->success('Data berhasih ditambah', 'Pesan berhasil');
         return redirect()->route('debitur.index');
-
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\debitur  $debitur
-     * @return \Illuminate\Http\Response
-     */
-    public function show(debitur $debitur)
-    {
-        //
+    public function show(debitur $debitur){
         $debiturs = User::find($id);
         $detail_debit = debitur::all();
         return view('backend/debitur/ubah', compact('debiturs','detail_debit','deb'));
     }
 
-    public function detail(Request $request)
-    {
-        //
+    public function detail(Request $request){
         $devbiturs = User::find($request->id);
         $detail_debit = debitur::all();
 
@@ -114,35 +75,15 @@ class DebiturController extends Controller
         return view('backend/debitur/detail', compact('debiturs','detail_debit','deb'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\debitur  $debitur
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        // $debiturs = User::find($id);
-        // $detail_debit = debitur::all();
+    public function edit($id){
         $deb = debitur::select('debiturs.*','users.*')
             ->join('users', 'debiturs.user_id', '=', 'users.id')
             ->where('users.id', $id)
             ->first();
-            // dd($deb);
         return view('backend/debitur/ubah', compact('deb'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\debitur  $debitur
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
         $debiturs = User::find($id);
         $request->merge(['username' => $request->email]);
         $debiturs->fill($request->all())->save();
@@ -150,15 +91,8 @@ class DebiturController extends Controller
         toastr()->success('Data berhasih diubah', 'Pesan berhasil');
         return redirect()->route('debitur.index');
     }
+    
+    public function destroy(debitur $debitur)    {
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\debitur  $debitur
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(debitur $debitur)
-    {
-        //
     }
 }

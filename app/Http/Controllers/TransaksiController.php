@@ -13,6 +13,10 @@ use PDF;
 
 class TransaksiController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('roles:PegawaiLPD');
+    }
     public function index(){
         $transaksis = transaksi::all();
         $users = User::all();
@@ -96,19 +100,5 @@ class TransaksiController extends Controller
         $customPaper = array(0,0,660,560);
         $pdf = PDF::loadview('backend/transaksi/cetakBuktiTransaksi', compact('transaksi','users'))->setPaper($customPaper, 'potrait');
         return $pdf->download('Cetak-bukti-transfer.pdf');
-
     }
-    // public function flat(transaksi $transaksi, $waktu)
-    // {
-    //     $hitPokok = $transaksi->jumlah_kredit / $waktu;
-
-    //     return Response()->json(['angsuran_pokok' => $hitPokok]);
-    // }
-
-    // public function getBungaFlat(transaksi $transaksi, $bunga, $waktu)
-    // {
-    //     $hitBunga = $transaksi->jumlah_kredit * $bunga / $waktu;
-
-    //     return Response()->json(['biaya_bunga' => $hitBunga]);
-    // }
 }

@@ -10,25 +10,32 @@
             <div class="page-title-icon"><i class="pe-7s-car icon-gradient bg-mean-fruit"></i></div>
             <div>Tambah Data User<div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div></div>
         </div>
-        <div class="page-title-actions"> 
-            </div>    
+        <div class="page-title-actions">
+            </div>
         </div>
-    </div>            
+    </div>
     <div class="row">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
-                <form class="" method="post" action="{{ route('datauser.store') }}" enctype="multipart/form-data">
+                <form class="needs-validation"  method="post" action="{{ route('datauser.store') }}" enctype="multipart/form-data" novalidate>
                 {{csrf_field() }}
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
-                            <input name="name" id="name" placeholder="Masukkan Nama Lengkap" type="text" class="form-control">
+                            <input name="name" id="name" placeholder="Masukkan Nama Lengkap" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Nama Lengkap Tidak Boleh Kosong
+                            </div>
                         </div>
+
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <input name="username" id="username" placeholder="Masukkan Username" type="text" class="form-control">
+                            <input name="username" id="username" placeholder="Masukkan Username" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Username Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="position-relative row form-group">
@@ -40,37 +47,49 @@
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Roles</label>
                         <div class="col-sm-10">
-                            <select name="roles_id" id="roles_id" class="form-control select2"> 
+                            <select name="roles_id" id="roles_id" class="form-control select2" required>
                                 <option selected="selected" value="" disabled>Pilih Jabatan</option>
-                            @foreach($roles as $role)   
+                            @foreach($roles as $role)
                                 <option value="{{$role->id}}">{{$role->nama_roles}}</option>
                             @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                Roles/Hak Akses Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-10">
-                            <select name="jk" id="jk" class="form-control select2"> 
+                            <select name="jk" id="jk" class="form-control select2" required>
                                 <option selected="selected" value="" disabled>Jenis Kelamin</option>
-                            @foreach(["L" => "L", "P" => "P" ] AS $jk => $label)   
+                            @foreach(["L" => "L", "P" => "P" ] AS $jk => $label)
                                 <option value="{{$jk}}">{{$label}}</option>
                             @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                Jenis Kelamin Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col-sm-10">
-                            <input name="tempat_lahir" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control">
+                            <input name="tempat_lahir" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Tempat Lahir Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                         <div class="input-group col-sm-10">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir">
+                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" required>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Tanggal Lahir Tidak Boleh Kosong
                             </div>
                         </div>
                     </div>
@@ -85,7 +104,7 @@
                                 </ul>
                             </div>
                         @endif --}}
-                        <!-- End of Validasi Images -->   
+                        <!-- End of Validasi Images -->
                     {{-- <div class="form-group row">
                         <label class="col-sm-2 col-form-label">File Upload</label>
                         <div class="col-md-10">
@@ -100,7 +119,7 @@
                     <div class="position-relative row form-check">
                         <div class="col-sm-10 offset-sm-2">
                             <!-- <button type="submit" class="btn btn-secondary">Submit</button> -->
-                            <input type="submit" class="btn btn-secondary btn-sm" value="Simpan">
+                            <button type="submit" class="btn btn-secondary btn-sm" value="Simpan">Simpan</button>
                         </div>
                     </div>
                 </form>
@@ -110,7 +129,8 @@
 </div>
 @endsection
 @push('scripts')
-<script>
+  
+   <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict';

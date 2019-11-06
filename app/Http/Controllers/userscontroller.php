@@ -10,41 +10,24 @@ use Auth;
 
 class userscontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('roles:KetuaLPD');
+    }
+
+    public function index(){
         $users = user::all();
         $roles = roles::all();
         return view('backend/datauser/index', compact('users','roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
         $users = user::all();
         $roles = roles::all();
         return view('backend/datauser/add', compact('users','roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
         $request->validate([
             'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -66,49 +49,23 @@ class userscontroller extends Controller
         return redirect('datauser');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function show($id){
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, $id)
-    {
-        //
+    public function edit(Request $request, $id){
         $users = user::find($id);
         $roles = roles::all();
         return view('backend/datauser/ubah', compact('users','roles'));
     }
 
-    public function ubah(Request $request)
-    {
-        //
+    public function ubah(Request $request){
         $users = user::find($request->id);
         $roles = roles::all();
         return view('backend/datauser/reset', compact('users','roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
         $user = user::find($id);
         $user->username = $request->username;
         $user->password = bcrypt($request->username);
@@ -121,33 +78,26 @@ class userscontroller extends Controller
             }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+
     }
+
     public function ubahprofile(Request $request, $id){
-      $users = user::find($id);
-      $users->nama = $request->name;
-      $users->username = $request->username;
-      $users->roles_id = $request->roles_id;
-      $users->tempat_lahir = $request->tempat_lahir;
-      $users->tanggal_lahir = $request->tanggal_lahir;
-      $users->jk = $request->jk;
-      $users->email = $request->email;
-      $users->no_telp = $request->no_telp;
-      $users->save();
-      toastr()->success('Data berhasih diubah', 'Pesan berhasil');
-      return redirect()->route('datauser.index');
+        $users = user::find($id);
+        $users->nama = $request->name;
+        $users->username = $request->username;
+        $users->roles_id = $request->roles_id;
+        $users->tempat_lahir = $request->tempat_lahir;
+        $users->tanggal_lahir = $request->tanggal_lahir;
+        $users->jk = $request->jk;
+        $users->email = $request->email;
+        $users->no_telp = $request->no_telp;
+        $users->save();
+        toastr()->success('Data berhasih diubah', 'Pesan berhasil');
+        return redirect()->route('datauser.index');
     }
 
     public function detail(Request $request, $id){
-
         $users = user::find($id);
         $roles = roles::all();
         return view('backend/datauser/detail', compact('users','roles'));

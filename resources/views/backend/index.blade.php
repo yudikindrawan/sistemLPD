@@ -1,7 +1,18 @@
 @extends('layouts.master')
 @section ('title', 'Dashboard - Sistem Informasi Akutansi LPD Desa Tojan')
-
+@if (Auth::user()->roles_id == 3)
+    @push('styles')
+    <style>
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    </style>
+@endpush
+@endif
 @section('content')
+@if (Auth::user()->roles_id != 3)
 <div class="app-main__outer">
     <div class="app-main__inner">
         <div class="app-page-title">
@@ -101,6 +112,30 @@
         </div>
     </div>
 </div>
+@elseif (Auth::user()->roles_id == 3)
+    <br><br><br><br><br><br><br><br><br><br>
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-sm-5 m-1">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                <h5 class="card-title text-white">Informasi Angsuran</h5>
+                <p class="card-text">Menampilkan informasi angsuran</p>
+                <a href="{{ route('info-debitur')}}" class="btn btn-primary btn-block">Tampilkan Informasi Angsuran</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-5 m-1">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                <h5 class="card-title text-white">Syarat & Ketentuan</h5>
+                <p class="card-text">Syarat dan ketentuan peminjaman di LPD</p>
+                <a href="{{ route('faq')}}" class="btn btn-primary btn-block">Tampilkan Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+@endif
 @endsection
 @push('scripts')
 <script type="text/javascript">

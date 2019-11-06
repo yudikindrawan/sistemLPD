@@ -17,58 +17,45 @@
     <div class="row">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
-                <form class="" method="post" action="{{ route('angsuran.store') }}" enctype="multipart/form-data" id="myForm">
+                <form class="needs-validation" method="post" action="{{ route('angsuran.store') }}" enctype="multipart/form-data" id="myForm" novalidate>
                 @csrf
                     <hr>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label jenis_bunga">No Transaksi</label>
                         <div class="col-sm-4">
-                            <select name="no_transaksi" id="no_transaksi" class="mb-2 form-control select2 @error('no_transaksi') is-invalid @enderror no_transaksi">
+                            <select name="no_transaksi" id="no_transaksi" class="mb-2 form-control select2 @error('no_transaksi') is-invalid @enderror no_transaksi" required>
                                 <option selected="selected" value="" disabled>Pilih No Transaksi</option>
                             @foreach($transaksi as $trans)
                                 <option value="{{$trans->id}}">{{$trans->id}}</option>
                             @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                No Transaksi Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
-                    {{-- <div class="position-relative row form-group">
-                        <label for="examplePassword" class="col-sm-2 col-form-label">Nama Debitur</label>
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label">Tanggal Pembayaran</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('nama_debitur') is-invalid @enderror nama_debitur" name="nama_debitur" id="nama_debitur" disabled>
+                            <input  type="text" class="form-control @error('tanggal_pembayaran') is-invalid @enderror datepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" required>
+                            <div class="invalid-feedback">
+                                Tanggal Pembayaran Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
-                                @error('nama_debitur')
+                                @error('tanggal_pembayaran')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror --}}
-                    {{-- <div class="position-relative row form-group">
-                        <label for="examplePassword" class="col-sm-2 col-form-label">Tanggal Awal Kredit</label>
-                        <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror tanggal_kredit" name="tanggal_kredit" id="tanggal_kredit" disabled>
-                        </div>
-                    </div>
-                                @error('jumlah_kredit')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                      <div class="position-relative row form-group">
-                          <label for="examplePassword" class="col-sm-2 col-form-label">Tanggal Pembayaran</label>
-                          <div class="col-sm-10">
-                              <input  type="text" class="form-control @error('tanggal_pembayaran') is-invalid @enderror datepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" >
-                          </div>
-                      </div>
-                                            @error('tanggal_pembayaran')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                @enderror
                     <hr>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" readonly>
+                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" readonly required>
+                                <div class="invalid-feedback">
+                                    Jumlah Pinjaman Tidak Boleh Kosong
+                                </div>
                         </div>
                     </div>
                                 @error('jumlah_kredit')
@@ -79,7 +66,10 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Biaya Bunga</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="biayabunga" readonly>
+                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="biayabunga" readonly required>
+                                <div class="invalid-feedback">
+                                    Biaya Bunga Tidak Boleh Kosong
+                                </div>
                         </div>
                     </div>
                                 @error('biaya_bunga')
@@ -90,7 +80,10 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Total Pembayaran</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror total_pembayaran" name="jumlah_pembayaran" id="jumlah_pembayaran" readonly>
+                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror total_pembayaran" name="jumlah_pembayaran" id="jumlah_pembayaran" readonly required>
+                                <div class="invalid-feedback">
+                                    Total Pembayaran Tidak Boleh Kosong
+                                </div>
                         </div>
                     </div>
                                 @error('biaya_bunga')
@@ -101,7 +94,10 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Sisa Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pembayaran" id="jmlkredit" >
+                            <input  type="text" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pembayaran" id="jmlkredit" readonly>
+                                <div class="invalid-feedback">
+                                    Sisa Pinjaman Tidak Boleh Kosong
+                                </div>
                         </div>
                     </div>
                                 @error('sisa_pinjaman')
@@ -113,7 +109,10 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jangka Waktu</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('angsuranKe') is-invalid @enderror angsuranKe" name="angsuranKe" id="angsuranKe">
+                            <input  type="text" class="form-control @error('angsuranKe') is-invalid @enderror angsuranKe" name="angsuranKe" id="angsuranKe" required>
+                                <div class="invalid-feedback">
+                                    Jangka Waktu Tidak Boleh Kosong
+                                </div>
                         </div>
                     </div>
                                 @error('angsuranKe')
@@ -121,24 +120,30 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                  <div class="position-relative row form-group">
-                      <label for="examplePassword" class="col-sm-2 col-form-label angsuran_pokok">Angsuran Pokok</label>
-                      <div class="col-sm-4">
-                          <div class="input-group-append">
-                              <input type="text" class="form-control @error('angsuran_pokok') is-invalid @enderror angsuran_pokok" name="angsuran_pokok" id="angsuran_pokok">
-                          </div>
-                      </div>
-                  </div>
-                              @error('angsuran_pokok')
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $message }}</strong>
-                                  </span>
-                              @enderror
+                    <div class="position-relative row form-group">
+                        <label for="examplePassword" class="col-sm-2 col-form-label angsuran_pokok">Angsuran Pokok</label>
+                        <div class="col-sm-6">
+                            <div class="input-group-append">
+                                <input type="text" class="form-control @error('angsuran_pokok') is-invalid @enderror angsuran_pokok" name="angsuran_pokok" id="angsuran_pokok" required>
+                                    <div class="invalid-feedback">
+                                        Angsuran Pokok Tidak Boleh Kosong
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                                @error('angsuran_pokok')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_pokok">Jumlah Pokok</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="input-group-append">
-                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror jumlah_pokok" name="jumlah_pokok" id="jumlah_pokok" value="">
+                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror jumlah_pokok" name="jumlah_pokok" id="jumlah_pokok" value="" required>
+                                    <div class="invalid-feedback">
+                                        Jumlah Pokok Tidak Boleh Kosong
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -150,9 +155,12 @@
 
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_bunga">Jumlah Bunga</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="input-group-prepend">
-                                <input type="text" class="form-control @error('jumlah_bunga') is-invalid @enderror jumla" name="jumlah_bunga" id="jumlah_bunga" value="">
+                                <input type="text" class="form-control @error('jumlah_bunga') is-invalid @enderror jumla" name="jumlah_bunga" id="jumlah_bunga" value="" required>
+                                    <div class="invalid-feedback">
+                                        Jumlah Bunga Tidak Boleh Kosong
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -163,9 +171,12 @@
                                 @enderror
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label total">Total yang harus di bayar</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="input-group-prepend">
-                                <input type="text" class="form-control @error('total') is-invalid @enderror" name="total_bayar" id="total_bayar">
+                                <input type="text" class="form-control @error('total') is-invalid @enderror" name="total_bayar" id="total_bayar" required>
+                                    <div class="invalid-feedback">
+                                        Total Tidak Boleh Kosong
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -176,9 +187,12 @@
                                 @enderror
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_pokok">Denda</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="input-group-append">
-                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror denda" name="denda" id="denda">
+                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror denda" name="denda" id="denda" required>
+                                    <div class="invalid-feedback">
+                                        Denda Tidak Boleh Kosong
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -298,6 +312,26 @@
             autoclose: true,
         });
 </script>
+<script>
+     // Example starter JavaScript for disabling form submissions if there are invalid fields
+     (function() {
+         'use strict';
+         window.addEventListener('load', function() {
+             // Fetch all the forms we want to apply custom Bootstrap validation styles to
+             var forms = document.getElementsByClassName('needs-validation');
+             // Loop over them and prevent submission
+             var validation = Array.prototype.filter.call(forms, function(form) {
+                 form.addEventListener('submit', function(event) {
+                     if (form.checkValidity() === false) {
+                         event.preventDefault();
+                         event.stopPropagation();
+                     }
+                     form.classList.add('was-validated');
+                 }, false);
+             });
+         }, false);
+     })();
+ </script>
 
 {{-- <script>
 

@@ -14,6 +14,11 @@ use Carbon\Carbon;
 
 class AngsuranController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('roles:PegawaiLPD');
+    }
+    
     public function index(){
         $angsurans = angsuran::all();
         $transaksi = transaksi::all();
@@ -39,9 +44,6 @@ class AngsuranController extends Controller
         $angsuran->transaksi_id = $req->no_transaksi;
 
         $kr = transaksi::select('jumlah_kredit')->where('id', $req->no_transaksi)->first();
-        // if ($angsuran->) {
-        //   // code...
-        // }
             $angsuran->tanggal_pembayaran = $req->input('tanggal_pembayaran');
             $angsuran->jumlah_pembayaran = $req->jumlah_pembayaran;
             $angsuran->sisa_pembayaran = $req->sisa_pembayaran;
@@ -53,24 +55,10 @@ class AngsuranController extends Controller
             $transaksi=DB::table('transaksis')->select('jumlah_kredit','tanggal_kredit')
             ->where('id', $req->no_transaksi)
             ->update(['jumlah_kredit' => $kr['jumlah_kredit']-$req->angsuran_pokok,'tanggal_kredit' => Carbon::now()->addMonths(1)]);
-            // dd($transaksi);
             $angsuran->save();
 
         toastr()->success('Data berhasil disimpan', 'Pesan berhasil');
         return redirect()->back();
-
-
-        // $angsuran = angsuran::create([
-        //   'transaksi_id' => $request->no_transaksi,
-        //   'tanggal_pembayaran' => $request->tanggal_kredit,
-        //   'jumlah_pembayaran' => $request->total_pembayaran,
-        //   'sisa_pembayran' => $request->sisa_pinjaman,
-        //   'pembayaran_bunga' => $request->jumlah_bunga,
-        //   'pembayaran_denda' => $request->denda,
-        //   'sisa_kredit' => $request->jumlah_kredit,
-        //   'angsuran' => $request->angsuranKe,
-        // ])->save();
-
     }
 
     public function detailAngsuran(Request $request){

@@ -16,6 +16,8 @@ Route::get('cetak-test', function () {
 });
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'dashboardcontroller@index')->name('dashboard');
+Route::get('/info-debitur', 'dashboardcontroller@infoDeb')->name('info-debitur');
+Route::get('/FaQ', 'dashboardcontroller@FaQ')->name('faq');
 Auth::routes();
 // Login Route
 Route::get('login', 'logincontroller@getlogin')->name('login');

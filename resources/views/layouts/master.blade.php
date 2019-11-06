@@ -6,8 +6,9 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         @include('layouts.header')
         @include('layouts.setting')
-        @include('layouts.sidebar')
-
+        @if (Auth::user()->roles_id != 3)
+            @include('layouts.sidebar')
+        @endif
         @yield('content')
         @include('layouts.footer')
         @include('layouts.scripts')
