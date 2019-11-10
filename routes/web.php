@@ -40,10 +40,12 @@ Route::resource('bunga', 'BungakreditController');
 // Debitur
 Route::resource('debitur', 'DebiturController');
 Route::get('debitur-detail', 'DebiturController@detail')->name('debitur-detail');
+Route::get('/Informasi', 'dashboardcontroller@showInfoDeb')->name('informasi-debitur');
 
 // Angsuran
 Route::resource('angsuran', 'AngsuranController');
 Route::get('/cari-transaksi', 'AngsuranController@cariTransaksi')->name('cari-transaksi');
+Route::get('/cari-angsuran', 'AngsuranController@hitungAngsuran')->name('cari-angsuran');
 Route::get('/angsuran-detai','AngsuranController@detailAngsuran')->name('angsuran-detail');
 Route::delete('angsuran/delete', 'AngsuranController@destroy');
 Route::get('/cetak-bukti-angsuran/{id}', 'AngsuranController@cetakBuktiAngsuran')->name('cetak-bukti-angsuran');

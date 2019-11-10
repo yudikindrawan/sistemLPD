@@ -36,7 +36,7 @@
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">No KTP</label>
                         <div class="col-sm-10">
-                            <input class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp" id="no_ktp"  placeholder="Masukkan No KTP" type="text" required>
+                            <input onkeypress="return hanyaAngka(event)"  class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp" id="no_ktp"  placeholder="Masukkan No KTP" type="text" required>
                             <div class="invalid-feedback">
                                 No KTP Tidak Boleh Kosong
                             </div>
@@ -84,10 +84,10 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">No Telepon</label>
                         <div class="col-sm-10">
-                            <input class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" placeholder="Masukkan No Telepon" type="text" required>
+                            <input onkeypress="return hanyaAngka(event)"  class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" placeholder="Masukkan No Telepon" type="text" required>
                             <div class="invalid-feedback">
-                            No Telepon Tidak Boleh Kosong
-                        </div>
+                                No Telepon Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                                 @error('no_telp')
@@ -99,9 +99,9 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col-sm-10">
                             <input class="form-control @error('tempat_lahir') is-invalid @enderror" name="tempat_lahir" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" required>
-                        <div class="invalid-feedback">
-                            Tempat Lahir Tidak Boleh Kosong
-                        </div>
+                            <div class="invalid-feedback">
+                                Tempat Lahir Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div> 
                                 @error('tempat_lahir')
@@ -180,5 +180,14 @@
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
+    </script>
+    <script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+        return false;
+        return true;
+        }
     </script>
 @endpush

@@ -26,11 +26,16 @@ class AngsuranController extends Controller
     }
 
     public function cariTransaksi(Request $request){
-        $transaksi = transaksi::select('jumlah_kredit','biaya_bunga','total','jangka_waktu','angsuran_pokok','tanggal_kredit','users.nama')
+        $transaksi = transaksi::select('jumlah_kredit','biaya_bunga','total','jangka_waktu','angsuran_pokok','tanggal_kredit','users.nama','bunga_id')
         ->join('users','transaksis.users_id','=','users.id')
         ->where('transaksis.id', $request->id)
         ->first();
         return Response()->json($transaksi);
+    }
+
+    public function hitungAngsuran(Request $req){
+        $angsuran  = angsuran::where('transaksi_id', $req->id)->count();
+        return Response()->json($angsuran);
     }
 
     public function create(){
@@ -43,7 +48,7 @@ class AngsuranController extends Controller
         $angsuran = new angsuran;
         $angsuran->transaksi_id = $req->no_transaksi;
 
-        $kr = transaksi::select('jumlah_kredit')->where('id', $req->no_transaksi)->first();
+        $kr = transaksi::select('jumlah_kredit','jangka_waktu')->where('id', $req->no_transaksi)->first();
             $angsuran->tanggal_pembayaran = $req->input('tanggal_pembayaran');
             $angsuran->jumlah_pembayaran = $req->jumlah_pembayaran;
             $angsuran->sisa_pembayaran = $req->sisa_pembayaran;
@@ -52,9 +57,9 @@ class AngsuranController extends Controller
             $angsuran->sisa_kredit = $req->angsuran_pokok;
             $angsuran->angsuran = $req->angsuranKe;
 
-            $transaksi=DB::table('transaksis')->select('jumlah_kredit','tanggal_kredit')
+            $transaksi=DB::table('transaksis')->select('jumlah_kredit','tanggal_kredit','jangka_waktu')
             ->where('id', $req->no_transaksi)
-            ->update(['jumlah_kredit' => $kr['jumlah_kredit']-$req->angsuran_pokok,'tanggal_kredit' => Carbon::now()->addMonths(1)]);
+            ->update(['jumlah_kredit' => $kr['jumlah_kredit']-$req->angsuran_pokok,'tanggal_kredit' => Carbon::now()->addMonths(1),$kr['jangkawaktu']-1]);
             $angsuran->save();
 
         toastr()->success('Data berhasil disimpan', 'Pesan berhasil');
@@ -83,7 +88,6 @@ class AngsuranController extends Controller
     }
 
     public function destroy(Request $req){
-        //
         DB::table("angsurans")->delete($req->delete);
         toastr()->success('Data berhasih dihapus', 'Pesan berhasil');
         return redirect()->route('angsuran.index');

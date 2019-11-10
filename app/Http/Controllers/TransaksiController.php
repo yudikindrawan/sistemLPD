@@ -47,7 +47,7 @@ class TransaksiController extends Controller
         ->where('transaksis.id', $req->id)
         ->first();
 
-        dd($transaksi);
+        // dd($transaksi);
 
         return view('backend/transaksi/detail', compact('transaksi','user','bunga'));
     }

@@ -78,7 +78,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text"  placeholder="Masukkan Jumlah Pinjaman" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" required>
+                            <input  type="text" onkeypress="return hanyaAngka(event)" placeholder="Masukkan Jumlah Pinjaman" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" required>
                             <div class="invalid-feedback">
                                 Jumlah Pinjaman Tidak Boleh Kosong
                             </div>
@@ -93,7 +93,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label jangka_waktu">Jangka Waktu</label>
                         <div class="col-sm-6">
                         <div class="input-group-append">
-                            <input type="text"  placeholder="Masukkan Jangka Waktu" class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu" id="jnkwaktu" required>
+                            <input type="text" onkeypress="return hanyaAngka(event)" placeholder="Masukkan Jangka Waktu" class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu" id="jnkwaktu" required>
                             <span class="input-group-text">bulan</span>
                             <div class="invalid-feedback">
                                 Jangka Waktu Tidak Boleh Kosong
@@ -110,7 +110,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Setting Bunga</label>
                         <div class="col-sm-6">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Masukkan Bunga" class="form-control @error('bunga') is-invalid @enderror" name="bunga" id="bungas" required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" placeholder="Masukkan Bunga" class="form-control @error('bunga') is-invalid @enderror" name="bunga" id="bungas" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text">%</span>
                                 </div>
@@ -149,7 +149,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Angsuran Pokok</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Angsuran Pokok" class="form-control @error('angsuran_pokok') is-invalid @enderror" name="angsuran_pokok" id="angsuran_pokok" readonly required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" placeholder="Angsuran Pokok" class="form-control @error('angsuran_pokok') is-invalid @enderror" name="angsuran_pokok" id="angsuran_pokok" readonly required>
                                 <div class="input-group-append">
                                 </div>
                                 <div class="invalid-feedback">
@@ -167,7 +167,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya bunga</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Biaya Bunga" class="form-control @error('biaya_bunga') is-invalid @enderror" name="biaya_bunga" id="biaya_bunga" readonly required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" placeholder="Biaya Bunga" class="form-control @error('biaya_bunga') is-invalid @enderror" name="biaya_bunga" id="biaya_bunga" readonly required>
                                 <div class="input-group-append">
                                 </div>
                                 <div class="invalid-feedback">
@@ -185,7 +185,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya Admin</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Biaya Admin" class="form-control @error('biaya_admin') is-invalid @enderror" name="biaya_admin" id="biaya_admin" readonly required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" placeholder="Biaya Admin" class="form-control @error('biaya_admin') is-invalid @enderror" name="biaya_admin" id="biaya_admin" readonly required>
                                 <div class="input-group-append">
                                 </div>
                                 <div class="invalid-feedback">
@@ -203,7 +203,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Biaya Materai</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Biaya Materai" class="form-control @error('biaya_materai') is-invalid @enderror" name="biaya_materai" id="biaya_materai" readonly required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" placeholder="Biaya Materai" class="form-control @error('biaya_materai') is-invalid @enderror" name="biaya_materai" id="biaya_materai" readonly required>
                                 <div class="input-group-append">
                                 </div>
                                 <div class="invalid-feedback">
@@ -221,7 +221,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label bunga">Total Pembayaran</label>
                         <div class="col-sm-4">
                             <div class="input-group-prepend">
-                                <input type="text"  placeholder="Total Pembayaran" class="form-control @error('total_pembayaran') is-invalid @enderror" name="total" id="total" readonly required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" placeholder="Total Pembayaran" class="form-control @error('total_pembayaran') is-invalid @enderror" name="total" id="total" readonly required>
                                 <div class="input-group-append">
                                 </div>
                                 <div class="invalid-feedback">
@@ -425,23 +425,32 @@ jQuery('.datepicker').datepicker({
 
 </script>
 <script>
-     // Example starter JavaScript for disabling form submissions if there are invalid fields
-     (function() {
-         'use strict';
-         window.addEventListener('load', function() {
-             // Fetch all the forms we want to apply custom Bootstrap validation styles to
-             var forms = document.getElementsByClassName('needs-validation');
-             // Loop over them and prevent submission
-             var validation = Array.prototype.filter.call(forms, function(form) {
-                 form.addEventListener('submit', function(event) {
-                     if (form.checkValidity() === false) {
-                         event.preventDefault();
-                         event.stopPropagation();
-                     }
-                     form.classList.add('was-validated');
-                 }, false);
-             });
-         }, false);
-     })();
- </script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+<script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+        return false;
+        return true;
+    }
+</script>
 @endpush

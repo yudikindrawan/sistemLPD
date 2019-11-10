@@ -129,8 +129,7 @@
 </div>
 @endsection
 @push('scripts')
-  
-   <script>
+    <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict';
@@ -158,4 +157,13 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
+    <script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+        return false;
+        return true;
+    }
+</script>
 @endpush

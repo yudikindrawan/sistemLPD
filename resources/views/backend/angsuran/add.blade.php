@@ -52,7 +52,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jumlah Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" readonly required>
+                            <input  type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('jumlah_kredit') is-invalid @enderror jumlah_kredit" name="jumlah_kredit" id="jmlkredit" readonly required>
                                 <div class="invalid-feedback">
                                     Jumlah Pinjaman Tidak Boleh Kosong
                                 </div>
@@ -66,7 +66,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Biaya Bunga</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="biayabunga" readonly required>
+                            <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('biaya_bunga') is-invalid @enderror biaya_bunga" name="biaya_bunga" id="biayabunga" readonly required>
                                 <div class="invalid-feedback">
                                     Biaya Bunga Tidak Boleh Kosong
                                 </div>
@@ -80,7 +80,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Total Pembayaran</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control @error('biaya_bunga') is-invalid @enderror total_pembayaran" name="jumlah_pembayaran" id="jumlah_pembayaran" readonly required>
+                            <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('biaya_bunga') is-invalid @enderror total_pembayaran" name="jumlah_pembayaran" id="jumlah_pembayaran" readonly required>
                                 <div class="invalid-feedback">
                                     Total Pembayaran Tidak Boleh Kosong
                                 </div>
@@ -94,7 +94,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Sisa Pinjaman</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pembayaran" id="jmlkredit" readonly>
+                            <input  type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('sisa_pinjaman') is-invalid @enderror sisa_pinjaman" name="sisa_pembayaran" id="jmlkredit" readonly>
                                 <div class="invalid-feedback">
                                     Sisa Pinjaman Tidak Boleh Kosong
                                 </div>
@@ -109,7 +109,7 @@
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Jangka Waktu</label>
                         <div class="col-sm-10">
-                            <input  type="text" class="form-control @error('angsuranKe') is-invalid @enderror angsuranKe" name="angsuranKe" id="angsuranKe" required>
+                            <input  type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('angsuranKe') is-invalid @enderror angsuranKe" name="angsuranKe" id="angsuranKe" required>
                                 <div class="invalid-feedback">
                                     Jangka Waktu Tidak Boleh Kosong
                                 </div>
@@ -124,7 +124,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label angsuran_pokok">Angsuran Pokok</label>
                         <div class="col-sm-6">
                             <div class="input-group-append">
-                                <input type="text" class="form-control @error('angsuran_pokok') is-invalid @enderror angsuran_pokok" name="angsuran_pokok" id="angsuran_pokok" required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('angsuran_pokok') is-invalid @enderror angsuran_pokok" name="angsuran_pokok" id="angsuran_pokok" required>
                                     <div class="invalid-feedback">
                                         Angsuran Pokok Tidak Boleh Kosong
                                     </div>
@@ -140,7 +140,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_pokok">Jumlah Pokok</label>
                         <div class="col-sm-6">
                             <div class="input-group-append">
-                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror jumlah_pokok" name="jumlah_pokok" id="jumlah_pokok" value="" required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('jumlah_pokok') is-invalid @enderror jumlah_pokok" name="jumlah_pokok" id="jumlah_pokok" value="" required>
                                     <div class="invalid-feedback">
                                         Jumlah Pokok Tidak Boleh Kosong
                                     </div>
@@ -157,7 +157,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_bunga">Jumlah Bunga</label>
                         <div class="col-sm-6">
                             <div class="input-group-prepend">
-                                <input type="text" class="form-control @error('jumlah_bunga') is-invalid @enderror jumla" name="jumlah_bunga" id="jumlah_bunga" value="" required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('jumlah_bunga') is-invalid @enderror jumla" name="jumlah_bunga" id="jumlah_bunga" value="" required>
                                     <div class="invalid-feedback">
                                         Jumlah Bunga Tidak Boleh Kosong
                                     </div>
@@ -173,7 +173,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label total">Total yang harus di bayar</label>
                         <div class="col-sm-6">
                             <div class="input-group-prepend">
-                                <input type="text" class="form-control @error('total') is-invalid @enderror" name="total_bayar" id="total_bayar" required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('total') is-invalid @enderror" name="total_bayar" id="total_bayar" required>
                                     <div class="invalid-feedback">
                                         Total Tidak Boleh Kosong
                                     </div>
@@ -189,7 +189,7 @@
                         <label for="examplePassword" class="col-sm-2 col-form-label jumlah_pokok">Denda</label>
                         <div class="col-sm-6">
                             <div class="input-group-append">
-                                <input type="text" class="form-control @error('jumlah_pokok') is-invalid @enderror denda" name="denda" id="denda" required>
+                                <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('jumlah_pokok') is-invalid @enderror denda" name="denda" id="denda" required>
                                     <div class="invalid-feedback">
                                         Denda Tidak Boleh Kosong
                                     </div>
@@ -259,12 +259,35 @@
 
 
             $('#jumlah_pokok').val(data.angsuran_pokok);
-            $('#jumlah_bunga').val(data.biaya_bunga);
-            $('#total_bayar').val(parseFloat(angsuranPokok) + parseFloat(biayaBunga));
+            alert(data.bunga_id)
+            if (data.bunga_id == 1 ) {
+                cicilanbulan = data.jumlah_kredit - (data.jumlah_kredit*data.biaya_bunga)
+                $('#jumlah_bunga').val(cicilanbulan);      
+            }else if (data.bunga_id ==2 ) {
+                
+                    a = 1;
+                    $.ajax({
+                        type:'get',
+                        url:"{{route('cari-angsuran')}}",
+                        data:{'id':id},
+                        dataType:'json',//return data will be json
+                        success:function(data){
+                            a = a +1
+                        }
+                    });
+                    jmlkredit = data.jumlah_kredit;
+                    pokokpinjaman = data.jumlah_kredit / data.jangka_waktu;
+                    bunga = data.biaya_bunga;
+                    kreditEfektif = (jmlkredit - ( a - 1) * pokokpinjaman) * bunga / 12;
+                    cicilanbulan = pokokpinjaman + kreditEfektif;
+                    // alert(cicilanbulan)
+                    $('#jumlah_bunga').val(cicilanbulan);
+            }
+            $('#total_bayar').val(parseFloat(data.angsuran_pokok) + parseFloat($('#jumlah_bunga').val()));
 
         },
         error:function(){
-          alert('error')
+            alert('error')
         }
 
         });
@@ -314,25 +337,33 @@
 </script>
 <script>
      // Example starter JavaScript for disabling form submissions if there are invalid fields
-     (function() {
-         'use strict';
-         window.addEventListener('load', function() {
-             // Fetch all the forms we want to apply custom Bootstrap validation styles to
-             var forms = document.getElementsByClassName('needs-validation');
-             // Loop over them and prevent submission
-             var validation = Array.prototype.filter.call(forms, function(form) {
-                 form.addEventListener('submit', function(event) {
-                     if (form.checkValidity() === false) {
-                         event.preventDefault();
-                         event.stopPropagation();
-                     }
-                     form.classList.add('was-validated');
-                 }, false);
-             });
-         }, false);
-     })();
- </script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+<script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
 
+        return false;
+        return true;
+    }
+</script>
 {{-- <script>
 
 

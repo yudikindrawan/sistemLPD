@@ -17,63 +17,87 @@
     <div class="row">
         <div class="main-card mb-3 card col-12">
             <div class="card-body">
-                <form class="" method="post" action="{{ route('debitur.update', $deb->id) }}" enctype="multipart/form-data">
+                <form class="needs-validation" method="post" action="{{ route('debitur.update', $deb->id) }}" enctype="multipart/form-data" novalidate>
                 {{csrf_field() }}
                     {{method_field('put')}}
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
-                            <input name="nama" id="nama" value="{{$deb->nama}}" type="text" class="form-control">
+                            <input name="nama" id="nama" value="{{$deb->nama}}" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Nama Lengkap Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">No KTP</label>
                         <div class="col-sm-10">
-                            <input name="no_ktp" id="no_ktp" value="{{$deb->no_ktp}}" type="text" class="form-control">
+                            <input onkeypress="return hanyaAngka(event)" name="no_ktp" id="no_ktp" value="{{$deb->no_ktp}}" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                No KTP Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">E-mail</label>
                         <div class="col-sm-10">
-                            <input name="email" id="email" value="{{$deb->email}}" type="email" class="form-control">
+                            <input name="email" id="email" value="{{$deb->email}}" type="email" class="form-control" required>
+                            <div class="invalid-feedback">
+                                E-mail Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-10">
-                            <select name="jk" id="jk" class="form-control select2"> 
+                            <select name="jk" id="jk" class="form-control select2" required> 
                                 <option selected="selected" value="" disabled>Jenis Kelamin</option>
                             @foreach(["L" => "L", "P" => "P" ] AS $jk => $label)   
                                 <option value="{{$jk}}" {{old("jk", $deb->jk) == $jk ? "selected" : " "}}>{{$label}}</option>
                             @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                Jenis Kelamin Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">No Telepon</label>
                         <div class="col-sm-10">
-                        <input name="no_telp" id="no_telp" value="{{$deb->no_telp}}" type="text" class="form-control">
+                            <input onkeypress="return hanyaAngka(event)"  name="no_telp" id="no_telp" value="{{$deb->no_telp}}" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                No Telepon Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col-sm-10">
-                            <input name="tempat_lahir" id="examplePassword" value="{{$deb->tempat_lahir}}" type="text" class="form-control">
+                            <input name="tempat_lahir" id="examplePassword" value="{{$deb->tempat_lahir}}" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Tempat Lahir Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                         <div class="input-group col-sm-10">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" value="{{$deb->tanggal_lahir}}">
+                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" value="{{$deb->tanggal_lahir}}" required>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Tanggal Lahir Tidak Boleh Kosong
                             </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Pekerjaan</label>
                         <div class="col-sm-10">
-                        <input name="pekerjaan" id="examplePassword" value="{{$deb->pekerjaan}}" type="text" class="form-control">
+                            <input name="pekerjaan" id="examplePassword" value="{{$deb->pekerjaan}}" type="text" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Pekerjaan Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                         <!-- Validasi Image -->
@@ -139,5 +163,14 @@
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
+    </script>
+    <script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+        return false;
+        return true;
+        }
     </script>
 @endpush

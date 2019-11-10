@@ -17,18 +17,24 @@
     <div class="row">
         <div class="main-card mb-3 card col-md-12">
             <div class="card-body">
-                <form class="" method="post" action="{{ route('datauser.profile', $users->id ) }}" enctype="multipart/form-data">
+                <form class="needs-validation" method="post" action="{{ route('datauser.profile', $users->id ) }}" enctype="multipart/form-data" novalidate>
                 {{csrf_field() }}
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
-                            <input name="name" id="name" placeholder="Masukkan Nama Lengkap" type="text" class="form-control" value="{{$users->nama}}">
+                            <input name="name" id="name" placeholder="Masukkan Nama Lengkap" type="text" class="form-control" value="{{$users->nama}}" required>
+                            <div class="invalid-feedback">
+                                Nama Lengkap Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleEmail" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <input name="username" id="username" placeholder="Masukkan Username" type="text" class="form-control" value="{{$users->username}}">
+                            <input name="username" id="username" placeholder="Masukkan Username" type="text" class="form-control" value="{{$users->username}}" required>
+                            <div class="invalid-feedback">
+                                Username Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="position-relative row form-group">
@@ -40,49 +46,61 @@
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Roles</label>
                         <div class="col-sm-10">
-                            <select name="roles_id" id="roles_id" class="form-control select2">
+                            <select name="roles_id" id="roles_id" class="form-control select2" required>
                                 <option selected="selected" value="" disabled>Pilih Jabatan</option>
                             @foreach($roles as $role)
                                 <option value="{{$role->id}}"
                                     @if ($role->id === $users->roles_id)
-                                      selected
+                                        selected
                                     @endif
-                                  >{{$role->nama_roles}}
+                                    >{{$role->nama_roles}}
                                 </option>
                             @endforeach
+                            <div class="invalid-feedback">
+                                Roles/Hak Akses Tidak Boleh Kosong
+                            </div>
                             </select>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="exampleSelect" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-10">
-                            <select name="jk" id="jk" class="form-control select2">
+                            <select name="jk" id="jk" class="form-control select2" required>
                                 <option selected="selected" value="" disabled>Jenis Kelamin</option>
                             @foreach(["L" => "L", "P" => "P" ] AS $jk => $label)
                                 <option value="{{$jk}}" {{old("jk", $users->jk) == $jk ? "selected" : " "}}>{{$label}}</option>
                             @endforeach
+                            <div class="invalid-feedback">
+                                Jenis Kelamin Tidak Boleh Kosong
+                            </div>
                             </select>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col-sm-10">
-                            <input name="tempat_lahir" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control" value="{{$users->tempat_lahir}}">
+                            <input name="tempat_lahir" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control" value="{{$users->tempat_lahir}}" required>
+                            <div class="invalid-feedback">
+                                Tempat Lahir Tidak Boleh Kosong
+                            </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                         <div class="input-group col-sm-10">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" value="{{$users->tanggal_lahir}}">
+                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy" name="tanggal_lahir" value="{{$users->tanggal_lahir}}" required>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <div class="invalid-feedback">
+                                Tanggal Lahir Tidak Boleh Kosong
                             </div>
                         </div>
                     </div>
                     <div class="position-relative row form-group">
                         <label for="examplePassword" class="col-sm-2 col-form-label">E-mail</label>
                         <div class="col-sm-10">
-                            <input name="email" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control" value="{{$users->email}}">
+                            <input name="email" id="examplePassword" placeholder="Masukkan Tempat Lahir" type="text" class="form-control" value="{{$users->email}}" required>
                         </div>
                     </div>
                         <!-- Validasi Image -->
@@ -121,6 +139,26 @@
 </div>
 @endsection
 @push('scripts')
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 <script>
     jQuery('.mydatepicker').datepicker();
 </script>
