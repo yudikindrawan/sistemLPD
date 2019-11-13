@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->belongsTo(roles::class, 'roles_id');
     }
     public function angsuran(){
-        return $this->hasMany(angsuran::class);
+        return $this->hasMany(angsuran::class, 'users_id');
     }
     public function transaksi(){
         return $this->hasMany('App\transaksi','users_id');

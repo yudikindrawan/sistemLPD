@@ -36,6 +36,8 @@ class TransaksiController extends Controller
     {
         $request->merge(['id' => 'TRNS'.rand(1,9999)]);
         $kredit = transaksi::create($request->all());
+
+        $riwyat = riwayat_transaksi::create($request->all());
         toastr()->success('Data berhasih ditambah', 'Pesan berhasil');
         return redirect()->route('transaksi.index');
     }

@@ -72,10 +72,10 @@
                 <div class="card-body">
                   <table class="table table-striped">
                     <tbody class="">
-                      <tr>
+                      {{-- <tr>
                         <td><b>No Transaksi</b></td>
-                        <td><b>{{$infoDeb->id ?? ''}}</b></td>
-                      </tr>
+                        <td><b>{{$infoDeb->transaksi_id ?? ''}}</b></td>
+                      </tr> --}}
                       <tr>
                         <td><b>Tanggal Kredit</b></td>
                         <td><b>{{$infoDeb->tanggal_kredit ?? ''}}</b></td>
@@ -84,7 +84,7 @@
                         <td>Jumlah Kredit</td>
                         <td> {{$infoDeb->jumlah_kredit ?? ''}}</td>
                       </tr>
-                       <tr>
+                      <tr>
                         <td>Jangka Waktu</td>
                         <td>{{$infoDeb->jangka_waktu ?? ''}} Bulan</td>
                       </tr>
@@ -133,13 +133,12 @@
                                 {{-- <th>Angsuran</th> --}}
                             </tr>
                             </thead>
-                              @foreach ($getA as $key => $value)
+                              @foreach ($angsuran as $key => $value) 
                             <tbody>
-
                                 <td>{{$value->transaksi_id}}</td>
                                 <td>{{$value->tanggal_pembayaran}}</td>
                                 <td>Rp.{{ number_format($value->jumlah_pembayaran,2)}}</td>
-                                <td>Rp.{{ number_format($value->sisa_pembayaran,2)}}</td>
+                                <td>Rp.{{ number_format($value->sisa_pembayaran,2)}}</td> 
 
                                 {{-- <td>{{$angsuran->pembayaran_bunga}}</td>
                                 <td>{{$angsuran->pembayaran_denda}}</td>

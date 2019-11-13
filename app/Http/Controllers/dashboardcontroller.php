@@ -34,24 +34,30 @@ class dashboardcontroller extends Controller
         ->select('transaksis.*','users.*')
         ->where('users_id', '=', Auth::user()->id)
         ->first();
+        // dd($infoDeb);
 
-        $getA = transaksi::select('transaksis.*', 'angsurans.*')
-        ->join('angsurans', 'transaksis.id', '=', 'angsurans.transaksi_id')
+        $angsuran = DB::table('angsurans')
+        ->join('users', 'angsurans.users_id','=','users.id')
+        ->select('angsurans.*','users.*')
+        ->where('users_id', '=', Auth::user()->id)
+        ->get();
+        // dd($angsuran);
+
+        // $getA = angsuran::where('transaksi_id', $req->)
+        // ->join('angsurans', 'transaksis.id', '=', 'angsurans.transaksi_id')
         // ->where('transaksi_id')
-        ->get();
+        // ->get();
       // dd($getA);
+        
+        // $getA = DB::table('transaksis')
+        // ->join('angsurans','transaksis.id','=','angsurans.transaksi_id')
+        // ->select('angsurans.*','transaksis.*')
+        // ->where('transaksi_id','=','transaksi.id')
+        // ->get();
+        // $count =;
+        // dd($count);
 
-        return view('backend/debitur/info', compact('infoDeb','getA'));
-    }
-
-    public function showInfoDeb(Request $req){
-        $infoDeb = DB::table('transaksis')
-        ->join('users', 'konselings.users.id', '=', 'users.id')
-        ->select('konselings.*','users.*')
-        ->where('users_id', '=', Auth::user())
-        ->get();
-
-        return view('backend/debitur/info', compact('infoDeb'));
+        return view('backend/debitur/info', compact('infoDeb','angsuran'));
     }
 
     public function FaQ(){

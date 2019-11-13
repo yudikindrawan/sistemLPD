@@ -57,6 +57,6 @@ class UpdateStatusTunggakan extends Command
             $value->tanggal_kredit = Carbon::now()->addMonths(1);
             $value->save();
         }
-        DB::table('transaksis')->where('tanggal_kredit', '<', $value->tanggal_kredit)->update(['status_tunggakan'=>'Macet']);
+        DB::table('transaksis')->where('tanggal_kredit', '<', '11/11/2019')->update(['status_tunggakan'=>'Macet']);
     }
 }

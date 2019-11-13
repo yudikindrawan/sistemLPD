@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section ('title', 'Data Bunga Kredit - Sistem Informasi Akutansi LPD Desa Tojan')
+@section ('title', 'Data Angsuran - Sistem Informasi Akutansi LPD Desa Tojan')
 
 @section('content')
 <div class="app-main__outer">
@@ -25,16 +25,16 @@
                     <table id="zero_config" class="table table-borderd table-striped">
                         <thead>
                         <tr>
-                          <th>No</th>
-                          <th>No Transaksi</th>
-                          <th>Tanggal Pembayaran</th>
-                          <th>Jumlah Pembayaran</th>
-                          <th>Sisa Pinjaman</th>
-                          {{-- <th>Pembayaran Bunga</th>
-                          <th>Pembayaran denda</th>
-                          <th>Sisa Kredit</th>
-                          <th>Angsuran</th> --}}
-                          <th>aksi</th>
+                            <th>No</th>
+                            <th>No Transaksi</th>
+                            <th>Tanggal Pembayaran</th>
+                            <th>Jumlah Pembayaran</th>
+                            <th>Sisa Pinjaman</th>
+                            {{-- <th>Pembayaran Bunga</th>
+                            <th>Pembayaran denda</th>
+                            <th>Sisa Kredit</th>
+                            <th>Angsuran</th> --}}
+                            <th>aksi</th>
                         </tr>
                         </thead>
                         @php $i=0 @endphp

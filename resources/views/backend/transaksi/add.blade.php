@@ -318,7 +318,12 @@
                 $('#biaya_admin').val(biayaAdmin);
                 $('#biaya_materai').val(biayamaterai);
             }else if(str == 2){
-
+                a = 0;
+                var hitung_bunga = parbunga / jangkawaktu;
+                var total_menurun = pokokpinjaman * hitung_bunga;
+                $('#biaya_bunga').val(total_menurun);
+                $('#biaya_admin').val(biayaAdmin);
+                $('#biaya_materai').val(biayamaterai);
             }else{
 
             }
@@ -445,6 +450,20 @@ jQuery('.datepicker').datepicker({
     })();
 </script>
 <script>
+    $(document).ready(function(){
+        $("input[data-type='number']").keyup(function(event){
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40){
+                event.preventDefault();
+            }
+            var $this = $(this);
+            var num = $this.val().replace(/,/gi, "");
+            var num2 = num.split(/(?=(?:\d{3})+$)/).join(",");
+            console.log(num2);
+            // the following line has been simplified. Revision history contains original.
+            $this.val(num2);
+        });
+    });
     function hanyaAngka(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode
         if (charCode > 31 && (charCode < 48 || charCode > 57))
